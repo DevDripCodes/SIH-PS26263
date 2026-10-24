@@ -1,6 +1,6 @@
 # APAAR-Based Student Data Management & Verification Platform (SIH PS26263)
 
-Architecture: [docs/APAAR_Platform_Architecture.drawio](docs/APAAR_Platform_Architecture.drawio) · ech stack: [docs/tech-stack.jpeg](docs/tech-stack.jpeg)
+Architecture: [docs/APAAR_Platform_Architecture.drawio](docs/APAAR_Platform_Architecture.drawio) · Tech stack: [docs/tech-stack.jpeg](docs/tech-stack.jpeg)
 
 | Component | Technologies |
 |---|---|

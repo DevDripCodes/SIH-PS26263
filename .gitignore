@@ -1,2 +1,19 @@
-.env
 node_modules/
+dist/
+coverage/
+*.log
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Prisma generated client
+backend/generated/
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

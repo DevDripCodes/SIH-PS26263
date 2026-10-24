@@ -1,0 +1,520 @@
+<mxfile host="app.diagrams.net" pages="3">
+  <diagram id="arch" name="1. System Architecture">
+    <mxGraphModel dx="1746" dy="961" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="920" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="arch-1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=18;" value="&lt;b&gt;APAAR-Based Student Data Management &amp;amp; Verification Platform — System Architecture&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="1400" x="40" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-2" parent="1" style="shape=step;perimeter=stepPerimeter;fixedSize=1;size=16;whiteSpace=wrap;html=1;fillColor=#1f4e79;strokeColor=#1f4e79;fontColor=#ffffff;fontSize=11;fontStyle=1;" value="Institution" vertex="1">
+          <mxGeometry height="46" width="200" x="40" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-3" parent="1" style="shape=step;perimeter=stepPerimeter;fixedSize=1;size=16;whiteSpace=wrap;html=1;fillColor=#1f4e79;strokeColor=#1f4e79;fontColor=#ffffff;fontSize=11;fontStyle=1;" value="Student Data Upload" vertex="1">
+          <mxGeometry height="46" width="200" x="242" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-4" parent="1" style="shape=step;perimeter=stepPerimeter;fixedSize=1;size=16;whiteSpace=wrap;html=1;fillColor=#1f4e79;strokeColor=#1f4e79;fontColor=#ffffff;fontSize=11;fontStyle=1;" value="APAAR Validation" vertex="1">
+          <mxGeometry height="46" width="200" x="444" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-5" parent="1" style="shape=step;perimeter=stepPerimeter;fixedSize=1;size=16;whiteSpace=wrap;html=1;fillColor=#1f4e79;strokeColor=#1f4e79;fontColor=#ffffff;fontSize=11;fontStyle=1;" value="Data Verification" vertex="1">
+          <mxGeometry height="46" width="200" x="646" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-6" parent="1" style="shape=step;perimeter=stepPerimeter;fixedSize=1;size=16;whiteSpace=wrap;html=1;fillColor=#1f4e79;strokeColor=#1f4e79;fontColor=#ffffff;fontSize=11;fontStyle=1;" value="AICTE Central Repository" vertex="1">
+          <mxGeometry height="46" width="200" x="848" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-7" parent="1" style="shape=step;perimeter=stepPerimeter;fixedSize=1;size=16;whiteSpace=wrap;html=1;fillColor=#1f4e79;strokeColor=#1f4e79;fontColor=#ffffff;fontSize=11;fontStyle=1;" value="Analytics &amp;amp; Monitoring" vertex="1">
+          <mxGeometry height="46" width="200" x="1050" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-8" parent="1" style="shape=step;perimeter=stepPerimeter;fixedSize=1;size=16;whiteSpace=wrap;html=1;fillColor=#1f4e79;strokeColor=#1f4e79;fontColor=#ffffff;fontSize=11;fontStyle=1;" value="Authorized Verification" vertex="1">
+          <mxGeometry height="46" width="200" x="1252" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-9" parent="1" style="swimlane;rounded=1;html=1;startSize=32;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=13;swimlaneFillColor=#ffffff;arcSize=4;" value="Users / Stakeholders" vertex="1">
+          <mxGeometry height="580" width="170" x="40" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-10" parent="arch-9" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;arcSize=10;" value="Institution Data Operator" vertex="1">
+          <mxGeometry height="58" width="150" x="10" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-11" parent="arch-9" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;arcSize=10;" value="Institution Approver (Director/Principal)" vertex="1">
+          <mxGeometry height="58" width="150" x="10" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-12" parent="arch-9" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;arcSize=10;" value="AICTE HQ Admin" vertex="1">
+          <mxGeometry height="58" width="150" x="10" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-13" parent="arch-9" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;arcSize=10;" value="Regional Officer" vertex="1">
+          <mxGeometry height="58" width="150" x="10" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-15" parent="arch-9" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;arcSize=10;" value="Employer / Regulator (Verifier)" vertex="1">
+          <mxGeometry height="58" width="150" x="10" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-16" parent="arch-9" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;arcSize=10;" value="Degree-Awarding Body" vertex="1">
+          <mxGeometry height="58" width="150" x="10" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-17" parent="1" style="swimlane;rounded=1;html=1;startSize=32;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=13;swimlaneFillColor=#ffffff;arcSize=4;" value="Access Channels" vertex="1">
+          <mxGeometry height="580" width="190" x="240" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-18" parent="arch-17" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;arcSize=10;" value="Institution Web Portal&lt;br&gt;(bulk CSV/Excel, forms)" vertex="1">
+          <mxGeometry height="66" width="170" x="10" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-19" parent="arch-17" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;arcSize=10;" value="Institution ERP&lt;br&gt;(REST API client)" vertex="1">
+          <mxGeometry height="66" width="170" x="10" y="133" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-20" parent="arch-17" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;arcSize=10;" value="AICTE &amp;amp; Regional&lt;br&gt;Dashboards" vertex="1">
+          <mxGeometry height="66" width="170" x="10" y="221" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-22" parent="arch-17" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;arcSize=10;" value="Verifier Portal&lt;br&gt;+ QR Scan Page" vertex="1">
+          <mxGeometry height="66" width="170" x="10" y="307" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-23" parent="arch-17" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;arcSize=10;" value="Certificate Print API&lt;br&gt;(degree bodies)" vertex="1">
+          <mxGeometry height="66" width="170" x="10" y="393" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-24" parent="1" style="swimlane;rounded=1;html=1;startSize=32;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=13;swimlaneFillColor=#ffffff;arcSize=4;" value="Security &amp;amp; API Gateway" vertex="1">
+          <mxGeometry height="580" width="190" x="460" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-25" parent="arch-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=11;arcSize=10;" value="&lt;b&gt;API Gateway&lt;/b&gt;&lt;br&gt;OpenAPI spec, versioning,&lt;br&gt;sandbox for institutions" vertex="1">
+          <mxGeometry height="80" width="170" x="10" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-26" parent="arch-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=11;arcSize=10;" value="OAuth2 / Keycloak SSO&lt;br&gt;+ MFA for officials" vertex="1">
+          <mxGeometry height="70" width="170" x="10" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-27" parent="arch-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=11;arcSize=10;" value="RBAC + ABAC&lt;br&gt;(role, region, institution)" vertex="1">
+          <mxGeometry height="70" width="170" x="10" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-28" parent="arch-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=11;arcSize=10;" value="Rate limiting, API keys,&lt;br&gt;IP allow-listing" vertex="1">
+          <mxGeometry height="70" width="170" x="10" y="312" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-29" parent="arch-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=11;arcSize=10;" value="TLS in transit,&lt;br&gt;AES-256 at rest,&lt;br&gt;field-level encryption" vertex="1">
+          <mxGeometry height="70" width="170" x="10" y="398" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-30" parent="arch-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=11;arcSize=10;" value="APAAR masking&lt;br&gt;in UI by default" vertex="1">
+          <mxGeometry height="70" width="170" x="10" y="484" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-31" parent="1" style="swimlane;rounded=1;html=1;startSize=32;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;swimlaneFillColor=#ffffff;arcSize=4;" value="Core Services" vertex="1">
+          <mxGeometry height="580" width="520" x="680" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-32" parent="arch-31" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="&lt;b&gt;Ingestion &amp;amp; Staging&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Bulk upload, single entry, API push,&lt;br&gt;drafts, lifecycle events&lt;br&gt;(transfer, dropout, graduation)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="108" width="240" x="15" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-33" parent="arch-31" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="&lt;b&gt;Validation Engine&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Schema &amp;amp; mandatory fields, APAAR&lt;br&gt;format + registry lookup, duplicates,&lt;br&gt;intake &amp;amp; supernumerary caps, consistency&lt;/font&gt;" vertex="1">
+          <mxGeometry height="108" width="240" x="265" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-34" parent="arch-31" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="&lt;b&gt;Maker-Checker Workflow&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Operator submits, Director approves&lt;br&gt;via OTP / DSC; deadline locking,&lt;br&gt;justified post-deadline edits&lt;/font&gt;" vertex="1">
+          <mxGeometry height="108" width="240" x="15" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-35" parent="arch-31" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="&lt;b&gt;Anomaly &amp;amp; Risk Engine&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Isolation Forest spikes, ghost-student&lt;br&gt;graph clusters, deadline dumping,&lt;br&gt;explainable institution risk score&lt;/font&gt;" vertex="1">
+          <mxGeometry height="108" width="240" x="265" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-36" parent="arch-31" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="&lt;b&gt;Consent Manager (DPDP)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Purpose-bound, time-bound consent,&lt;br&gt;selective disclosure,&lt;br&gt;revoke &amp;amp; correction requests&lt;/font&gt;" vertex="1">
+          <mxGeometry height="108" width="240" x="15" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-37" parent="arch-31" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="&lt;b&gt;Verification &amp;amp; Credentials&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Signed Verifiable Credentials, QR codes,&lt;br&gt;APAAR on certificates,&lt;br&gt;valid / revoked / tampered status&lt;/font&gt;" vertex="1">
+          <mxGeometry height="108" width="240" x="265" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-38" parent="arch-31" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="&lt;b&gt;Reports &amp;amp; Analytics&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Policy, accreditation, regulatory reports,&lt;br&gt;scheduled PDF/Excel exports,&lt;br&gt;natural-language queries&lt;/font&gt;" vertex="1">
+          <mxGeometry height="108" width="240" x="15" y="435" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-39" parent="arch-31" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="&lt;b&gt;Notifications &amp;amp; Webhooks&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Validation results, flags, deadlines,&lt;br&gt;consent requests to institutions,&lt;br&gt;officials and students&lt;/font&gt;" vertex="1">
+          <mxGeometry height="108" width="240" x="265" y="435" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-40" edge="1" parent="1" source="arch-32" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="arch-33" value="async queue">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-41" edge="1" parent="1" source="arch-33" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="arch-34" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-42" edge="1" parent="1" source="arch-33" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="arch-35" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-43" edge="1" parent="1" source="arch-36" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="arch-37" value="consent token">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-44" parent="1" style="swimlane;rounded=1;html=1;startSize=32;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;swimlaneFillColor=#ffffff;arcSize=4;" value="Data Layer" vertex="1">
+          <mxGeometry height="580" width="210" x="1230" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-45" parent="arch-44" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" value="&lt;b&gt;AICTE Central Repository&lt;/b&gt;&lt;br&gt;PostgreSQL + row-level security&lt;br&gt;(Institution, Program, Student,&lt;br&gt;Enrolment, Consent)" vertex="1">
+          <mxGeometry height="100" width="190" x="10" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-46" parent="arch-44" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;arcSize=10;" value="Job Queue&lt;br&gt;(Celery / BullMQ)" vertex="1">
+          <mxGeometry height="64" width="190" x="10" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-47" parent="arch-44" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;arcSize=10;" value="Redis Cache" vertex="1">
+          <mxGeometry height="64" width="190" x="10" y="242" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-48" parent="arch-44" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;arcSize=10;" value="Immutable Audit Log&lt;br&gt;(hash-chained entries)" vertex="1">
+          <mxGeometry height="64" width="190" x="10" y="324" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-49" parent="arch-44" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;arcSize=10;" value="Object Storage&lt;br&gt;(uploads, reports, certificates)" vertex="1">
+          <mxGeometry height="64" width="190" x="10" y="406" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-50" parent="arch-44" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;arcSize=10;" value="Credential Hash Ledger&lt;br&gt;(Merkle-root anchoring)" vertex="1">
+          <mxGeometry height="64" width="190" x="10" y="488" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-51" edge="1" parent="1" source="arch-9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="arch-17" value="use">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-52" edge="1" parent="1" source="arch-17" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="arch-24" value="HTTPS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-53" edge="1" parent="1" source="arch-24" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="arch-31" value="authorized calls">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-54" edge="1" parent="1" source="arch-31" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="arch-44" value="read / write">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-55" parent="1" style="swimlane;rounded=1;html=1;startSize=32;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=13;swimlaneFillColor=#ffffff;arcSize=4;" value="External Integrations (mocked where APIs are not public)" vertex="1">
+          <mxGeometry height="130" width="1400" x="40" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-56" parent="arch-55" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;arcSize=10;fontStyle=1;" value="APAAR / ABC Registry" vertex="1">
+          <mxGeometry height="60" width="210" x="20" y="48" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-57" parent="arch-55" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;arcSize=10;fontStyle=1;" value="DigiLocker" vertex="1">
+          <mxGeometry height="60" width="210" x="250" y="48" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-58" parent="arch-55" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;arcSize=10;fontStyle=1;" value="AICTE Approval Portal&lt;br&gt;(approved intake)" vertex="1">
+          <mxGeometry height="60" width="210" x="480" y="48" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-59" parent="arch-55" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;arcSize=10;fontStyle=1;" value="National Scholarship Portal" vertex="1">
+          <mxGeometry height="60" width="210" x="710" y="48" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-60" parent="arch-55" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;arcSize=10;fontStyle=1;" value="AISHE" vertex="1">
+          <mxGeometry height="60" width="210" x="940" y="48" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-61" parent="arch-55" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;arcSize=10;fontStyle=1;" value="Degree-Awarding Bodies /&lt;br&gt;University Systems" vertex="1">
+          <mxGeometry height="60" width="210" x="1170" y="48" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-62" edge="1" parent="1" source="arch-33" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;dashed=1;" target="arch-56" value="APAAR lookup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-63" edge="1" parent="1" source="arch-33" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;dashed=1;" target="arch-58" value="approved intake">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-64" edge="1" parent="1" source="arch-37" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;dashed=1;" target="arch-57" value="push credentials">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-65" edge="1" parent="1" source="arch-35" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;dashed=1;" target="arch-59" value="claims cross-check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-66" edge="1" parent="1" source="arch-38" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;dashed=1;" target="arch-60" value="statistics export">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-67" edge="1" parent="1" source="arch-37" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;dashed=1;" target="arch-61" value="APAAR + QR for certificates">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch-68" parent="1" style="text;html=1;align=left;fontSize=11;fontColor=#555555;" value="Legend: solid = internal flow · dashed = external integration · every write is recorded in the hash-chained audit log" vertex="1">
+          <mxGeometry height="24" width="1000" x="40" y="870" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="flow" name="2. Upload &amp; Validation Flow">
+    <mxGraphModel dx="1272" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1260" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="flow-1" parent="1" style="text;html=1;align=left;fontSize=18;" value="&lt;b&gt;Student Data Upload &amp;amp; Validation Pipeline&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="800" x="40" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1f4e79;fontColor=#ffffff;strokeColor=#1f4e79;fontSize=11;fontStyle=1;arcSize=40;" value="Institution uploads CSV / Excel&lt;br&gt;or pushes records via API" vertex="1">
+          <mxGeometry height="56" width="240" x="260" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="Store in staging area&lt;br&gt;(nothing reaches repository yet)" vertex="1">
+          <mxGeometry height="50" width="240" x="260" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-4" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Schema &amp;amp; mandatory&lt;br&gt;fields valid?" vertex="1">
+          <mxGeometry height="90" width="180" x="290" y="215" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="APAAR format check +&lt;br&gt;registry lookup (mock API)" vertex="1">
+          <mxGeometry height="50" width="240" x="260" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-6" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="APAAR exists and&lt;br&gt;name / DOB match?" vertex="1">
+          <mxGeometry height="90" width="180" x="290" y="405" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="Duplicate check&lt;br&gt;within institution" vertex="1">
+          <mxGeometry height="46" width="240" x="260" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="Cross-institution check:&lt;br&gt;same APAAR active elsewhere?" vertex="1">
+          <mxGeometry height="50" width="240" x="260" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="Seat check: regular admits ≤ approved intake;&lt;br&gt;each supernumerary type ≤ its cap" vertex="1">
+          <mxGeometry height="56" width="280" x="240" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="Consistency rules&lt;br&gt;(FN passport, OCI card, NRI proof,&lt;br&gt;age vs program, dates)" vertex="1">
+          <mxGeometry height="60" width="240" x="260" y="744" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="Anomaly &amp;amp; risk scoring&lt;br&gt;(spikes, shared phone/email clusters)" vertex="1">
+          <mxGeometry height="56" width="240" x="260" y="828" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-12" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Any blocking&lt;br&gt;errors?" vertex="1">
+          <mxGeometry height="90" width="180" x="290" y="908" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;arcSize=10;" value="Maker-checker approval&lt;br&gt;(Director OTP / DSC)" vertex="1">
+          <mxGeometry height="50" width="240" x="260" y="1022" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;arcSize=10;fontStyle=1;" value="Commit to AICTE Central Repository&lt;br&gt;+ hash-chained audit entry" vertex="1">
+          <mxGeometry height="56" width="240" x="260" y="1096" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;arcSize=10;fontStyle=1;" value="Dashboards refresh · webhooks fire ·&lt;br&gt;student notified · record verifiable" vertex="1">
+          <mxGeometry height="56" width="240" x="260" y="1176" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;arcSize=10;" value="&lt;b&gt;Row-level validation report&lt;/b&gt;&lt;br&gt;errors &amp;amp; warnings with reasons,&lt;br&gt;downloadable for correction" vertex="1">
+          <mxGeometry height="80" width="240" x="640" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;arcSize=10;" value="&lt;b&gt;Regional Officer review queue&lt;/b&gt;&lt;br&gt;excess intake, cross-institution&lt;br&gt;duplicates, high risk score&lt;br&gt;(warnings: approve / reject / query)" vertex="1">
+          <mxGeometry height="96" width="240" x="640" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=11;arcSize=10;" value="Institution corrects data&lt;br&gt;and resubmits" vertex="1">
+          <mxGeometry height="50" width="240" x="640" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-19" edge="1" parent="1" source="flow-2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-20" edge="1" parent="1" source="flow-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-21" edge="1" parent="1" source="flow-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-22" edge="1" parent="1" source="flow-7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-23" edge="1" parent="1" source="flow-8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-9" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-24" edge="1" parent="1" source="flow-9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-25" edge="1" parent="1" source="flow-10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-11" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-26" edge="1" parent="1" source="flow-11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-27" edge="1" parent="1" source="flow-13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-14" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-28" edge="1" parent="1" source="flow-14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-15" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-29" edge="1" parent="1" source="flow-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-5" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-30" edge="1" parent="1" source="flow-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-16" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-31" edge="1" parent="1" source="flow-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-7" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-32" edge="1" parent="1" source="flow-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-16" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-33" edge="1" parent="1" source="flow-12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-13" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-34" edge="1" parent="1" source="flow-12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-16" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-35" edge="1" parent="1" source="flow-16" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-18" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-36" edge="1" parent="1" source="flow-18" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;" target="flow-3" value="re-upload">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-37" edge="1" parent="1" source="flow-8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;dashed=1;" target="flow-17" value="flag">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-38" edge="1" parent="1" source="flow-9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;dashed=1;" target="flow-17" value="flag">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-39" edge="1" parent="1" source="flow-11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;dashed=1;" target="flow-17" value="flag">
+          <mxGeometry relative="1" x="-0.3158" y="-4" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-40" edge="1" parent="1" source="flow-17" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#555555;fontSize=10;dashed=1;" target="flow-13" value="cleared">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="erd" name="3. Data Model">
+    <mxGraphModel dx="1120" dy="616" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="720" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="erd-1" parent="1" style="text;html=1;align=left;fontSize=18;" value="&lt;b&gt;Core Data Model&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="600" x="40" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-2" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;horizontalStack=0;resizeParent=1;collapsible=0;html=1;fontSize=12;" value="Institution" vertex="1">
+          <mxGeometry height="140" width="230" x="40" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-3" parent="erd-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;PK&lt;/b&gt; aicte_permanent_id" vertex="1">
+          <mxGeometry height="22" width="230" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-4" parent="erd-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="name, type (PGDM / Engg / ...)" vertex="1">
+          <mxGeometry height="22" width="230" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-5" parent="erd-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="state, region" vertex="1">
+          <mxGeometry height="22" width="230" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-6" parent="erd-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="approval_status" vertex="1">
+          <mxGeometry height="22" width="230" y="96" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-7" parent="erd-2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="risk_score" vertex="1">
+          <mxGeometry height="22" width="230" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-8" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;horizontalStack=0;resizeParent=1;collapsible=0;html=1;fontSize=12;" value="Program" vertex="1">
+          <mxGeometry height="162" width="230" x="340" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-9" parent="erd-8" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;PK&lt;/b&gt; program_id" vertex="1">
+          <mxGeometry height="22" width="230" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-10" parent="erd-8" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;FK&lt;/b&gt; aicte_permanent_id" vertex="1">
+          <mxGeometry height="22" width="230" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-11" parent="erd-8" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="course, level, shift" vertex="1">
+          <mxGeometry height="22" width="230" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-12" parent="erd-8" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="academic_year" vertex="1">
+          <mxGeometry height="22" width="230" y="96" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-13" parent="erd-8" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="approved_intake" vertex="1">
+          <mxGeometry height="22" width="230" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-14" parent="erd-8" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="supernumerary_caps (JSON by type)" vertex="1">
+          <mxGeometry height="22" width="230" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-15" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;horizontalStack=0;resizeParent=1;collapsible=0;html=1;fontSize=12;" value="Student" vertex="1">
+          <mxGeometry height="162" width="280" x="40" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-16" parent="erd-15" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;PK&lt;/b&gt; apaar_id (12 digit)" vertex="1">
+          <mxGeometry height="22" width="280" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-17" parent="erd-15" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="name, dob, gender" vertex="1">
+          <mxGeometry height="22" width="280" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-18" parent="erd-15" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="category" vertex="1">
+          <mxGeometry height="22" width="280" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-19" parent="erd-15" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="nationality_status (Indian/NRI/OCI/PIO/FN)" vertex="1">
+          <mxGeometry height="22" width="280" y="96" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-20" parent="erd-15" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="passport_no / oci_card_no (encrypted)" vertex="1">
+          <mxGeometry height="22" width="280" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-21" parent="erd-15" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="mobile, email (hashed for matching)" vertex="1">
+          <mxGeometry height="22" width="280" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-22" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;horizontalStack=0;resizeParent=1;collapsible=0;html=1;fontSize=12;" value="Enrolment" vertex="1">
+          <mxGeometry height="206" width="270" x="385" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-23" parent="erd-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;PK&lt;/b&gt; enrolment_id" vertex="1">
+          <mxGeometry height="22" width="270" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-24" parent="erd-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;FK&lt;/b&gt; apaar_id" vertex="1">
+          <mxGeometry height="22" width="270" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-25" parent="erd-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;FK&lt;/b&gt; program_id" vertex="1">
+          <mxGeometry height="22" width="270" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-26" parent="erd-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="institution_student_id" vertex="1">
+          <mxGeometry height="22" width="270" y="96" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-27" parent="erd-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="seat_type (regular / supernumerary)" vertex="1">
+          <mxGeometry height="22" width="270" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-28" parent="erd-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="supernumerary_subtype" vertex="1">
+          <mxGeometry height="22" width="270" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-29" parent="erd-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="admission_date, status" vertex="1">
+          <mxGeometry height="22" width="270" y="162" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-30" parent="erd-22" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="validation_status, flags" vertex="1">
+          <mxGeometry height="22" width="270" y="184" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-31" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;horizontalStack=0;resizeParent=1;collapsible=0;html=1;fontSize=12;" value="Consent" vertex="1">
+          <mxGeometry height="140" width="240" x="720" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-32" parent="erd-31" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;PK&lt;/b&gt; consent_id" vertex="1">
+          <mxGeometry height="22" width="240" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-33" parent="erd-31" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;FK&lt;/b&gt; apaar_id" vertex="1">
+          <mxGeometry height="22" width="240" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-34" parent="erd-31" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="verifier_id, purpose" vertex="1">
+          <mxGeometry height="22" width="240" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-35" parent="erd-31" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="fields_shared" vertex="1">
+          <mxGeometry height="22" width="240" y="96" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-36" parent="erd-31" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="valid_until, revoked_at" vertex="1">
+          <mxGeometry height="22" width="240" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-37" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;horizontalStack=0;resizeParent=1;collapsible=0;html=1;fontSize=12;" value="VerificationRequest" vertex="1">
+          <mxGeometry height="118" width="240" x="720" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-38" parent="erd-37" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;PK&lt;/b&gt; request_id" vertex="1">
+          <mxGeometry height="22" width="240" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-39" parent="erd-37" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;FK&lt;/b&gt; consent_id" vertex="1">
+          <mxGeometry height="22" width="240" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-40" parent="erd-37" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="verifier_org, requested_at" vertex="1">
+          <mxGeometry height="22" width="240" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-41" parent="erd-37" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="result, accessed_at" vertex="1">
+          <mxGeometry height="22" width="240" y="96" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-42" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;horizontalStack=0;resizeParent=1;collapsible=0;html=1;fontSize=12;" value="Credential" vertex="1">
+          <mxGeometry height="140" width="240" x="720" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-43" parent="erd-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;PK&lt;/b&gt; credential_id" vertex="1">
+          <mxGeometry height="22" width="240" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-44" parent="erd-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;FK&lt;/b&gt; enrolment_id" vertex="1">
+          <mxGeometry height="22" width="240" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-45" parent="erd-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="type (enrolment / degree)" vertex="1">
+          <mxGeometry height="22" width="240" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-46" parent="erd-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="signed_payload, hash" vertex="1">
+          <mxGeometry height="22" width="240" y="96" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-47" parent="erd-42" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="qr_url, status (valid/revoked)" vertex="1">
+          <mxGeometry height="22" width="240" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-48" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;horizontalStack=0;resizeParent=1;collapsible=0;html=1;fontSize=12;" value="AuditLog" vertex="1">
+          <mxGeometry height="118" width="280" x="40" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-49" parent="erd-48" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="&lt;b&gt;PK&lt;/b&gt; log_id" vertex="1">
+          <mxGeometry height="22" width="280" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-50" parent="erd-48" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="actor, role, action" vertex="1">
+          <mxGeometry height="22" width="280" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-51" parent="erd-48" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="entity, entity_id, timestamp" vertex="1">
+          <mxGeometry height="22" width="280" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-52" parent="erd-48" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;html=1;fontSize=11;" value="prev_hash, entry_hash" vertex="1">
+          <mxGeometry height="22" width="280" y="96" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-53" edge="1" parent="1" source="erd-2" style="edgeStyle=entityRelationEdgeStyle;html=1;endArrow=ERmany;startArrow=ERmandOne;endFill=0;startFill=0;fontSize=10;" target="erd-8" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-54" edge="1" parent="1" source="erd-8" style="edgeStyle=entityRelationEdgeStyle;html=1;endArrow=ERmany;startArrow=ERmandOne;endFill=0;startFill=0;fontSize=10;" target="erd-22" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-55" edge="1" parent="1" source="erd-15" style="edgeStyle=entityRelationEdgeStyle;html=1;endArrow=ERmany;startArrow=ERmandOne;endFill=0;startFill=0;fontSize=10;" target="erd-22" value="1 : N (lifetime)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-56" edge="1" parent="1" source="erd-15" style="edgeStyle=entityRelationEdgeStyle;html=1;endArrow=ERmany;startArrow=ERmandOne;endFill=0;startFill=0;fontSize=10;" target="erd-31" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-57" edge="1" parent="1" source="erd-31" style="edgeStyle=entityRelationEdgeStyle;html=1;endArrow=ERmany;startArrow=ERmandOne;endFill=0;startFill=0;fontSize=10;" target="erd-37" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="erd-58" edge="1" parent="1" source="erd-22" style="edgeStyle=entityRelationEdgeStyle;html=1;endArrow=ERmany;startArrow=ERmandOne;endFill=0;startFill=0;fontSize=10;" target="erd-42" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

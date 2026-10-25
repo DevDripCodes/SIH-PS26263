@@ -6,8 +6,9 @@ import {
   BoxReveal,
   BottomGradient,
 } from '@/components/ui/modern-animated-sign-in';
-import { Sun, Moon, MailCheck, ArrowLeft, RotateCw } from 'lucide-react';
+import { Sun, Moon, MailCheck, ArrowLeft, RotateCw, LayoutDashboard } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { ApaarDashboard } from '@/components/dashboard/apaar-dashboard';
 
 type AuthMode = 'login' | 'forgot-password' | 'reset-sent';
 
@@ -172,6 +173,7 @@ const iconsArray: OrbitIcon[] = [
 ];
 
 export default function App() {
+  const [view, setView] = useState<'auth' | 'dashboard'>('auth');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [authMode, setAuthMode] = useState<AuthMode>('login');
   const [resendStatus, setResendStatus] = useState<string>('');
@@ -194,6 +196,7 @@ export default function App() {
   const handleLoginSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('Login submitted:', formData);
+    setView('dashboard');
   };
 
   const handleForgotSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -209,13 +212,13 @@ export default function App() {
 
   const loginFormFields = {
     header: 'Welcome back',
-    subHeader: 'Sign in to your account',
+    subHeader: 'Sign in to access AICTE APAAR Platform',
     fields: [
       {
         label: 'Email',
         required: true,
         type: 'email' as const,
-        placeholder: 'Enter your email address',
+        placeholder: 'Enter institution admin or student email',
         onChange: (event: ChangeEvent<HTMLInputElement>) =>
           handleInputChange(event, 'email'),
       },
@@ -228,7 +231,7 @@ export default function App() {
           handleInputChange(event, 'password'),
       },
     ],
-    submitButton: 'Sign in',
+    submitButton: 'Sign in to Dashboard',
     textVariantButton: 'Forgot password?',
   };
 
@@ -249,7 +252,15 @@ export default function App() {
     textVariantButton: '← Back to sign in',
   };
 
-  const orbitText = authMode === 'login' ? 'Animated Login' : 'Password Reset';
+  const orbitText = authMode === 'login' ? 'APAAR Portal' : 'Password Reset';
+
+  if (view === 'dashboard') {
+    return (
+      <div className={isDarkMode ? 'dark' : ''}>
+        <ApaarDashboard onSignOut={() => setView('auth')} />
+      </div>
+    );
+  }
 
   return (
     <main
@@ -257,8 +268,16 @@ export default function App() {
         isDarkMode ? 'dark bg-[#030712] text-white' : 'bg-white text-neutral-900'
       }`}
     >
-      {/* Theme Toggle Button in Top Right */}
-      <div className='fixed top-5 right-5 z-50'>
+      {/* Top Header Controls: Dashboard shortcut & Theme Toggle */}
+      <div className='fixed top-5 right-5 z-50 flex items-center gap-2'>
+        <button
+          onClick={() => setView('dashboard')}
+          className='flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-md transition cursor-pointer'
+        >
+          <LayoutDashboard className='w-3.5 h-3.5' />
+          <span>Launch Live Dashboard</span>
+        </button>
+
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
           className='flex items-center gap-2 px-3.5 py-2 text-xs font-medium rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur shadow-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 transition cursor-pointer'
@@ -267,12 +286,12 @@ export default function App() {
           {isDarkMode ? (
             <>
               <Sun className='w-4 h-4 text-amber-400' />
-              <span>Light Mode</span>
+              <span>Light</span>
             </>
           ) : (
             <>
               <Moon className='w-4 h-4 text-neutral-600' />
-              <span>Dark Mode</span>
+              <span>Dark</span>
             </>
           )}
         </button>

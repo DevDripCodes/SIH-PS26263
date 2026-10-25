@@ -217,20 +217,20 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
   return (
     <div className='min-h-screen bg-neutral-50 dark:bg-[#030712] text-neutral-900 dark:text-neutral-100 font-sans transition-colors'>
       {/* Top National Header Bar */}
-      <header className='sticky top-0 z-40 bg-white/95 dark:bg-neutral-900/95 backdrop-blur border-b border-neutral-200 dark:border-neutral-800 shadow-xs'>
+      <header className='sticky top-0 z-40 bg-white/95 dark:bg-neutral-900/95 backdrop-blur border-b border-neutral-200 dark:border-neutral-800 shadow-sm'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex items-center justify-between h-16'>
             {/* National Branding */}
             <div className='flex items-center gap-3'>
-              <div className='size-10 rounded-lg bg-linear-to-tr from-blue-700 via-indigo-600 to-sky-500 flex items-center justify-center text-white font-bold shadow-md'>
-                <ShieldCheck className='size-6' />
+              <div className='size-10 rounded-xl bg-blue-600 bg-gradient-to-tr from-blue-700 via-indigo-600 to-sky-500 flex items-center justify-center text-white font-bold shadow-md shadow-blue-500/20'>
+                <ShieldCheck className='size-6 text-white' />
               </div>
               <div>
                 <div className='flex items-center gap-2'>
-                  <span className='font-bold text-base sm:text-lg tracking-tight'>
+                  <span className='font-bold text-base sm:text-lg tracking-tight text-neutral-900 dark:text-white'>
                     APAAR
                   </span>
-                  <span className='text-[10px] font-semibold uppercase tracking-wider bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 px-2 py-0.5 rounded-full'>
+                  <span className='text-[10px] font-semibold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200/80 dark:bg-blue-950/80 dark:text-blue-300 dark:border-blue-800 px-2 py-0.5 rounded-full'>
                     AICTE Central Portal
                   </span>
                 </div>
@@ -246,8 +246,8 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                 onClick={() => { setActiveRole('institution'); setActiveTab('overview'); }}
                 className={`px-3 py-1.5 rounded-lg transition cursor-pointer flex items-center gap-1.5 ${
                   activeRole === 'institution'
-                    ? 'bg-white dark:bg-neutral-900 text-blue-600 dark:text-blue-400 shadow-xs font-semibold'
-                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900'
+                    ? 'bg-white dark:bg-neutral-900 text-blue-600 dark:text-blue-400 shadow-sm font-semibold'
+                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
                 }`}
               >
                 <School className='size-3.5' />
@@ -257,8 +257,8 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                 onClick={() => { setActiveRole('aicte-admin'); setActiveTab('overview'); }}
                 className={`px-3 py-1.5 rounded-lg transition cursor-pointer flex items-center gap-1.5 ${
                   activeRole === 'aicte-admin'
-                    ? 'bg-white dark:bg-neutral-900 text-blue-600 dark:text-blue-400 shadow-xs font-semibold'
-                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900'
+                    ? 'bg-white dark:bg-neutral-900 text-blue-600 dark:text-blue-400 shadow-sm font-semibold'
+                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
                 }`}
               >
                 <Building2 className='size-3.5' />
@@ -268,8 +268,8 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                 onClick={() => { setActiveRole('verifier'); setActiveTab('overview'); }}
                 className={`px-3 py-1.5 rounded-lg transition cursor-pointer flex items-center gap-1.5 ${
                   activeRole === 'verifier'
-                    ? 'bg-white dark:bg-neutral-900 text-blue-600 dark:text-blue-400 shadow-xs font-semibold'
-                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900'
+                    ? 'bg-white dark:bg-neutral-900 text-blue-600 dark:text-blue-400 shadow-sm font-semibold'
+                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
                 }`}
               >
                 <QrCode className='size-3.5' />
@@ -279,8 +279,8 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                 onClick={() => { setActiveRole('student'); setActiveTab('overview'); }}
                 className={`px-3 py-1.5 rounded-lg transition cursor-pointer flex items-center gap-1.5 ${
                   activeRole === 'student'
-                    ? 'bg-white dark:bg-neutral-900 text-blue-600 dark:text-blue-400 shadow-xs font-semibold'
-                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900'
+                    ? 'bg-white dark:bg-neutral-900 text-blue-600 dark:text-blue-400 shadow-sm font-semibold'
+                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
                 }`}
               >
                 <IdCard className='size-3.5' />
@@ -331,30 +331,31 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
         {activeRole === 'institution' && (
           <div className='space-y-6'>
             {/* Sub-header Banner */}
-            <div className='bg-linear-to-r from-blue-900 via-indigo-900 to-blue-950 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4'>
+            <div className='relative overflow-hidden bg-white dark:bg-neutral-900 rounded-2xl p-6 border border-neutral-200/90 dark:border-neutral-800 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4'>
+              <div className='absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-500' />
               <div>
-                <span className='inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-500/20 text-blue-200 border border-blue-400/30 mb-2'>
-                  <Sparkles className='size-3 text-amber-300' />
+                <span className='inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 mb-2'>
+                  <Sparkles className='size-3 text-amber-500' />
                   Academic Year 2026-2027 • Approved Intake Verification
                 </span>
-                <h1 className='text-2xl font-bold tracking-tight'>
+                <h1 className='text-2xl font-bold tracking-tight text-neutral-900 dark:text-white'>
                   Delhi Technological University
                 </h1>
-                <p className='text-sm text-blue-200/90 mt-1'>
-                  Permanent Institute ID: 1-9321482 • Region: North-West • Affiliated with AICTE
+                <p className='text-sm text-neutral-500 dark:text-neutral-400 mt-1'>
+                  Permanent Institute ID: <span className='font-mono font-medium text-neutral-800 dark:text-neutral-200'>1-9321482</span> • Region: North-West • Affiliated with AICTE
                 </p>
               </div>
               <div className='flex items-center gap-2'>
                 <button
                   onClick={() => setIsAddModalOpen(true)}
-                  className='bg-white text-blue-900 hover:bg-blue-50 px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2 shadow-sm cursor-pointer'
+                  className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2 shadow-sm cursor-pointer'
                 >
                   <UserPlus className='size-4' />
                   Add Student Record
                 </button>
                 <button
                   onClick={() => setActiveTab('upload')}
-                  className='bg-blue-600/80 hover:bg-blue-600 border border-blue-400/30 text-white px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2 cursor-pointer'
+                  className='bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2 cursor-pointer'
                 >
                   <Upload className='size-4' />
                   Bulk Upload (CSV)
@@ -364,7 +365,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
 
             {/* Key Metrics Cards */}
             <div className='grid grid-cols-2 lg:grid-cols-4 gap-4'>
-              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 shadow-xs'>
+              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 shadow-sm'>
                 <div className='flex items-center justify-between text-neutral-500'>
                   <span className='text-xs font-medium uppercase tracking-wider'>Approved Intake</span>
                   <Building2 className='size-4 text-blue-500' />
@@ -373,7 +374,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                 <p className='text-xs text-neutral-500 mt-1'>Sanctioned AICTE Seats</p>
               </div>
 
-              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 shadow-xs'>
+              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 shadow-sm'>
                 <div className='flex items-center justify-between text-neutral-500'>
                   <span className='text-xs font-medium uppercase tracking-wider'>Actual Enrolment</span>
                   <Users className='size-4 text-emerald-500' />
@@ -387,7 +388,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                 <p className='text-xs text-neutral-500 mt-1'>Verified with APAAR ID</p>
               </div>
 
-              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 shadow-xs'>
+              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 shadow-sm'>
                 <div className='flex items-center justify-between text-neutral-500'>
                   <span className='text-xs font-medium uppercase tracking-wider'>Supernumerary</span>
                   <FileCheck className='size-4 text-indigo-500' />
@@ -396,7 +397,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                 <p className='text-xs text-neutral-500 mt-1'>EWS, TFW & PMSSS Quota</p>
               </div>
 
-              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 shadow-xs'>
+              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 shadow-sm'>
                 <div className='flex items-center justify-between text-neutral-500'>
                   <span className='text-xs font-medium uppercase tracking-wider'>NRI / OCI / FN</span>
                   <SlidersHorizontal className='size-4 text-amber-500' />
@@ -442,7 +443,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
 
             {/* Tab Content: Overview (Branch-wise intake) */}
             {activeTab === 'overview' && (
-              <div className='bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 p-6 shadow-xs'>
+              <div className='bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 p-6 shadow-sm'>
                 <div className='flex items-center justify-between mb-4'>
                   <div>
                     <h2 className='text-base font-bold'>Branch-Wise Approved Intake vs Actual Admissions</h2>
@@ -522,7 +523,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
 
             {/* Tab Content: Student Directory */}
             {activeTab === 'students' && (
-              <div className='bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 p-6 shadow-xs space-y-4'>
+              <div className='bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 p-6 shadow-sm space-y-4'>
                 <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-3'>
                   <div className='relative flex-1 max-w-sm'>
                     <Search className='size-4 absolute left-3 top-2.5 text-neutral-400' />
@@ -531,7 +532,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder='Search by Student Name, APAAR ID, or Branch...'
-                      className='w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500'
+                      className='w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-blue-500'
                     />
                   </div>
 
@@ -539,7 +540,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                     <select
                       value={selectedCategory}
                       onChange={(e) => setSelectedCategory(e.target.value)}
-                      className='text-xs rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 px-3 py-1.5 focus:outline-hidden'
+                      className='text-xs rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 px-3 py-1.5 focus:outline-none'
                     >
                       <option value='All'>All Categories</option>
                       <option value='Regular'>Regular</option>
@@ -601,7 +602,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
 
             {/* Tab Content: Bulk Upload */}
             {activeTab === 'upload' && (
-              <div className='bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 p-8 shadow-xs text-center'>
+              <div className='bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 p-8 shadow-sm text-center'>
                 <div className='max-w-lg mx-auto space-y-4'>
                   <div className='size-14 mx-auto rounded-full bg-blue-50 dark:bg-blue-950/40 text-blue-600 flex items-center justify-center border border-blue-200 dark:border-blue-800'>
                     <Upload className='size-6' />
@@ -663,14 +664,15 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
         {/* ======================================================== */}
         {activeRole === 'aicte-admin' && (
           <div className='space-y-6'>
-            <div className='bg-linear-to-r from-neutral-900 to-indigo-950 text-white rounded-2xl p-6 shadow-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4'>
+            <div className='relative overflow-hidden bg-white dark:bg-neutral-900 rounded-2xl p-6 border border-neutral-200/90 dark:border-neutral-800 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4'>
+              <div className='absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500' />
               <div>
-                <span className='inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-400/20 text-amber-300 border border-amber-400/30 mb-2'>
-                  <ShieldCheck className='size-3' />
+                <span className='inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 mb-2'>
+                  <ShieldCheck className='size-3 text-amber-600 dark:text-amber-400' />
                   National Regulatory Authority • Live Anomaly Detection
                 </span>
-                <h1 className='text-2xl font-bold tracking-tight'>AICTE Central Monitoring Command</h1>
-                <p className='text-sm text-neutral-300 mt-1'>
+                <h1 className='text-2xl font-bold tracking-tight text-neutral-900 dark:text-white'>AICTE Central Monitoring Command</h1>
+                <p className='text-sm text-neutral-500 dark:text-neutral-400 mt-1'>
                   Pan-India Student Academic Registry & Enrolment Discrepancy Sentinel
                 </p>
               </div>
@@ -679,7 +681,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                 <button
                   type='button'
                   onClick={() => alert('Generating National AICTE Accreditation & Enrolment Report...')}
-                  className='bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2 cursor-pointer shadow-sm'
+                  className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2 cursor-pointer shadow-sm'
                 >
                   <Download className='size-4' />
                   Export National Audit Report
@@ -689,22 +691,22 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
 
             {/* National Stat Cards */}
             <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
-              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xs'>
+              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm'>
                 <p className='text-xs font-medium text-neutral-500 uppercase'>Approved Institutions</p>
                 <p className='text-2xl font-bold mt-2'>9,420</p>
                 <p className='text-xs text-emerald-600 dark:text-emerald-400 mt-1'>98.4% reporting online</p>
               </div>
-              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xs'>
+              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm'>
                 <p className='text-xs font-medium text-neutral-500 uppercase'>Total Sanctioned Intake</p>
                 <p className='text-2xl font-bold mt-2'>3,450,000</p>
                 <p className='text-xs text-neutral-500 mt-1'>Across all disciplines</p>
               </div>
-              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xs'>
+              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm'>
                 <p className='text-xs font-medium text-neutral-500 uppercase'>Registered APAAR IDs</p>
                 <p className='text-2xl font-bold mt-2 text-blue-600 dark:text-blue-400'>3,180,450</p>
                 <p className='text-xs text-neutral-500 mt-1'>Verified student credentials</p>
               </div>
-              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xs'>
+              <div className='bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm'>
                 <p className='text-xs font-medium text-neutral-500 uppercase'>Flagged Anomalies</p>
                 <p className='text-2xl font-bold mt-2 text-red-600'>{totalFlagged}</p>
                 <p className='text-xs text-red-500 mt-1'>Requires regulatory notice</p>
@@ -712,7 +714,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
             </div>
 
             {/* Anomaly Center Table */}
-            <div className='bg-white dark:bg-neutral-900 rounded-2xl border border-red-200 dark:border-red-950/60 p-6 shadow-xs space-y-4'>
+            <div className='bg-white dark:bg-neutral-900 rounded-2xl border border-red-200 dark:border-red-950/60 p-6 shadow-sm space-y-4'>
               <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-2'>
                   <div className='size-8 rounded-lg bg-red-100 dark:bg-red-950 text-red-600 flex items-center justify-center font-bold'>
@@ -787,11 +789,11 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                 value={verifyInput}
                 onChange={(e) => setVerifyInput(e.target.value)}
                 placeholder='Enter 12-digit APAAR ID (e.g. 9420-1845-6712)'
-                className='w-full px-2 py-2 text-sm bg-transparent focus:outline-hidden font-mono'
+                className='w-full px-2 py-2 text-sm bg-transparent focus:outline-none font-mono'
               />
               <button
                 onClick={handleVerify}
-                className='bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-xs font-semibold transition shrink-0 cursor-pointer shadow-xs'
+                className='bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-xs font-semibold transition shrink-0 cursor-pointer shadow-sm'
               >
                 Verify Record
               </button>
@@ -882,7 +884,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
             </div>
 
             {/* Smart Digital ID Card */}
-            <div className='bg-linear-to-tr from-slate-900 via-indigo-950 to-blue-900 rounded-3xl p-6 text-white shadow-2xl relative overflow-hidden border border-white/10'>
+            <div className='bg-slate-900 bg-gradient-to-tr from-slate-900 via-indigo-950 to-blue-900 rounded-3xl p-6 text-white shadow-2xl relative overflow-hidden border border-slate-700/60'>
               <div className='absolute -right-10 -bottom-10 size-48 rounded-full bg-blue-500/10 blur-2xl pointer-events-none' />
 
               <div className='flex items-center justify-between border-b border-white/10 pb-4'>
@@ -983,7 +985,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                   value={newStudent.name}
                   onChange={(e) => setNewStudent({ ...newStudent, name: e.target.value })}
                   placeholder='e.g. Ananya Deshmukh'
-                  className='w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500'
+                  className='w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-blue-500'
                 />
               </div>
 
@@ -995,7 +997,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                   onChange={(e) => setNewStudent({ ...newStudent, apaarId: e.target.value })}
                   placeholder='e.g. 982144120934'
                   maxLength={14}
-                  className='w-full px-3 py-2 font-mono rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500'
+                  className='w-full px-3 py-2 font-mono rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-blue-500'
                 />
                 <p className='text-[10px] text-neutral-400 mt-0.5'>Format: 12 numeric digits assigned via DigiLocker / ABC</p>
               </div>
@@ -1005,7 +1007,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                 <select
                   value={newStudent.course}
                   onChange={(e) => setNewStudent({ ...newStudent, course: e.target.value })}
-                  className='w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 focus:outline-hidden'
+                  className='w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 focus:outline-none'
                 >
                   <option value='Computer Science & Engineering'>Computer Science & Engineering</option>
                   <option value='Artificial Intelligence & Data Science'>Artificial Intelligence & Data Science</option>
@@ -1020,7 +1022,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                 <select
                   value={newStudent.category}
                   onChange={(e) => setNewStudent({ ...newStudent, category: e.target.value as any })}
-                  className='w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 focus:outline-hidden'
+                  className='w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 focus:outline-none'
                 >
                   <option value='Regular'>Regular Intake</option>
                   <option value='Supernumerary (EWS/TFW)'>Supernumerary (EWS / TFW / PMSSS)</option>

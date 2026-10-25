@@ -1,0 +1,124 @@
+export {
+  getById as getInstitutionById,
+  updateApprovalStatus as updateInstitutionApprovalStatus,
+  type InstitutionActorContext,
+  type InstitutionSummary,
+  type InstitutionApprovalStatus,
+  PostCommitCacheInvalidationError,
+} from "./institution-repository";
+export {
+  getAffiliatingBodyById,
+  listAffiliatingBodies,
+  type AffiliatingBodyActor,
+  type AffiliatingBodySummary,
+} from "./affiliating-body-repository";
+export {
+  getProgramById,
+  listProgramsByInstitution,
+  type ProgramActor,
+  type ProgramSummary,
+} from "./program-repository";
+export {
+  getIntakeApprovalById,
+  getIntakeApprovalByProgramYear,
+  listIntakeApprovalsByInstitutionYear,
+  updateIntakeApprovalCaps,
+  type IntakeActor,
+  type IntakeApprovalSummary,
+  type IntakeSeatCaps,
+} from "./intake-approval-repository";
+export {
+  getSeatUtilisation,
+  getEnrolmentSummary,
+  getPipelineDaily,
+  getAnomalySummary,
+  getCredentialStatus,
+  getVerificationDaily,
+  getQuotaReconciliation,
+  getAnalyticsFreshness,
+  getPublicNationalSummary,
+  type AnalyticsActorContext,
+  type AnalyticsPage,
+  type SeatUtilisationRow,
+  type EnrolmentSummaryRow,
+  type PipelineDailyRow,
+  type AnomalySummaryRow,
+  type CredentialStatusRow,
+  type VerificationDailyRow,
+  type QuotaReconciliationRow,
+  type AnalyticsFreshnessRow,
+  type PublicNationalSummaryRow,
+} from "./analytics-repository";
+export { refreshAnalyticsAsAdmin, type AnalyticsRefreshResult } from "./analytics-refresh-service";
+export {
+  verifyCredential,
+  type VerifyCredentialInput,
+  type CredentialVerificationResult,
+  type PublicVerificationResult,
+  type VerificationPurpose,
+} from "./credential-verification-service";
+export {
+  getVerifierOrganisation,
+  listMyVerifierOrganisations,
+  reviewVerifierOrganisation,
+  registerVerifierOrganisation,
+  addVerifierOrganisationMember,
+  setMyVerifierMembershipActive,
+  setVerifierMembershipActive,
+  type VerifierActor,
+  type VerifierOrganisationSummary,
+  type VerifierOrganisationType,
+  type VerifierRegistrationType,
+} from "./verifier-organisation-repository";
+export {
+  createConsent,
+  listMyConsents,
+  withdrawMyConsent,
+  type ConsentActor,
+  type ConsentSummary,
+} from "./consent-repository";
+export {
+  getCredentialById,
+  issueCredential,
+  updateCredentialStatus,
+  type CredentialActor,
+  type CredentialSummary,
+  type IssueCredentialInput,
+  type UpdateCredentialStatusInput,
+} from "./credential-repository";
+export { verifyAuditChain, logApplicationAuditEvent, type AuditVerification } from "./audit-service";
+export {
+  promoteBatch,
+  promoteProgramBatch,
+  finalizeBatch,
+  type BatchPromotionResult,
+  type ProgramPromotionResult,
+} from "./promotion-service";
+export {
+  getStudentById,
+  listStudentEnrolments,
+  getEnrolment,
+  listEnrolmentStatusHistory,
+  type CoreActor,
+  type StudentSummary,
+  type EnrolmentSummary,
+  type EnrolmentStatusHistory,
+} from "./core-enrolment-repository";
+export {
+  createSubmissionBatch,
+  getSubmissionBatch,
+  listSubmissionBatches,
+  type BatchActor,
+  type SubmissionBatchSummary,
+} from "./submission-batch-repository";
+export {
+  ingestStagingRecords,
+  listStagingRecordSummaries,
+  listStagingAnomalies,
+  getStagingStatusSummary,
+  type StagingRecordInput,
+  type StagingRecordSummary,
+  type StagingAnomalySummary,
+  type StagingStatusSummary,
+  type StagingRecordActor,
+} from "./staging-record-repository";

@@ -5,7 +5,7 @@ import { AuthPage } from '@/pages/auth';
 
 export default function App() {
   const [view, setView] = useState<'auth' | 'dashboard'>('auth');
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   if (view === 'dashboard') {
     return (

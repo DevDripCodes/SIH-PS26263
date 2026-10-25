@@ -28,6 +28,21 @@ frontend/
   src/features/       upload, validation, approvals, dashboards, consent, verification, reports
 ```
 
+## Data ingestion (Stage 1)
+
+Institutions submit enrolments three ways from the dashboard's **Data Upload** tab (`frontend/src/features/upload`): CSV upload, Excel (.xlsx) upload, and a manual entry form. Each submission becomes one `staging.submission_batches` row, and every student row lands in `staging.staging_enrolment_records` as raw text, ready for the L1–L3 validation workers.
+
+| Endpoint (`/api/v1/ingestion`) | Purpose |
+|---|---|
+| `POST /preview` | Parse a CSV/XLSX file and show how its columns map. Writes nothing. |
+| `POST /upload` | Multipart `file`, `institutionId`, `academicYear` (e.g. `2026-27`). Returns 202 + batch. 409 if the same file was already uploaded (`allowDuplicate=true` to override). |
+| `POST /form` | JSON `{ institutionId, academicYear, records: [...] }`, up to 500 students. |
+| `GET /batches?institutionId=` · `GET /batches/:id` | Batch status and row counters. |
+| `GET /template?format=csv\|xlsx` | Blank template with the standard column headers. |
+| `GET /institutions` | Institution picker (until Keycloak auth provides the institution). |
+
+Column headers are matched loosely (`APAAR ID`, `apaar_no`, `Student Name`, `DOB`, …). See `backend/src/modules/ingestion/columns.ts`. Unknown columns are kept in `raw_payload`. Form entry needs `database/db_scripts/ingestion_patch.sql` applied (adds the `WEB_FORM` source channel).
+
 ## Getting started
 
 The database is hosted on Supabase; put its pooler connection string in `backend/.env` as `DATABASE_URL`.

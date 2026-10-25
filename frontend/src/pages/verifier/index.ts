@@ -1,2 +1,2 @@
 export { PublicVerifierPortal } from './PublicVerifierPortal';
-export { VerificationResultCard } from './VerificationResultCard';
+export * from './components';

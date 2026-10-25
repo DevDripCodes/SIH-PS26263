@@ -1,49 +1,11 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useState } from 'react';
 import { Sun, Moon, LayoutDashboard } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { ApaarDashboard } from '@/components/dashboard/apaar-dashboard';
-import {
-  TechOrbitHero,
-  LoginPage,
-  ForgotPasswordPage,
-  ResetSentPage,
-  type AuthMode,
-  type AuthFormData,
-} from '@/pages/auth';
+import { AuthPage } from '@/pages/auth';
 
 export default function App() {
   const [view, setView] = useState<'auth' | 'dashboard'>('auth');
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [authMode, setAuthMode] = useState<AuthMode>('login');
-  const [formData, setFormData] = useState<AuthFormData>({
-    email: '',
-    password: '',
-  });
-
-  const handleInputChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    name: keyof AuthFormData
-  ) => {
-    const value = event.target.value;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleLoginSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log('Login submitted:', formData);
-    setView('dashboard');
-  };
-
-  const handleForgotSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log('Forgot password requested for:', formData.email);
-    setAuthMode('reset-sent');
-  };
-
-  const orbitText = authMode === 'login' ? 'APAAR Portal' : 'Password Reset';
 
   if (view === 'dashboard') {
     return (
@@ -88,67 +50,8 @@ export default function App() {
         </button>
       </div>
 
-      <section className='flex max-lg:justify-center min-h-screen'>
-        {/* Left Side: Animated Orbit Display & Ripple */}
-        <TechOrbitHero text={orbitText} />
-
-        {/* Right Side: Auth Container */}
-        <span className='w-1/2 h-[100dvh] flex flex-col justify-center items-center max-lg:w-full max-lg:px-[10%]'>
-          <AnimatePresence mode='wait'>
-            {authMode === 'login' && (
-              <motion.div
-                key='login'
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.25 }}
-                className='w-full flex justify-center'
-              >
-                <LoginPage
-                  formData={formData}
-                  onInputChange={handleInputChange}
-                  onSubmit={handleLoginSubmit}
-                  onSwitchMode={setAuthMode}
-                />
-              </motion.div>
-            )}
-
-            {authMode === 'forgot-password' && (
-              <motion.div
-                key='forgot-password'
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.25 }}
-                className='w-full flex justify-center'
-              >
-                <ForgotPasswordPage
-                  formData={formData}
-                  onInputChange={handleInputChange}
-                  onSubmit={handleForgotSubmit}
-                  onSwitchMode={setAuthMode}
-                />
-              </motion.div>
-            )}
-
-            {authMode === 'reset-sent' && (
-              <motion.div
-                key='reset-sent'
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.25 }}
-                className='w-full flex justify-center'
-              >
-                <ResetSentPage
-                  email={formData.email}
-                  onSwitchMode={setAuthMode}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </span>
-      </section>
+      {/* Fully Modular Auth Page Component */}
+      <AuthPage onLoginSuccess={() => setView('dashboard')} />
     </main>
   );
 }

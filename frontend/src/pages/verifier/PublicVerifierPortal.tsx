@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { StudentRecord } from '@/types/apaar';
-import { QrCode, Search } from 'lucide-react';
-import { VerificationResultCard } from './VerificationResultCard';
+import { QrCode } from 'lucide-react';
+import { VerifierSearchBox, VerificationResultCard } from './components';
 
 interface PublicVerifierPortalProps {
   students: StudentRecord[];
@@ -34,25 +34,14 @@ export function PublicVerifierPortal({ students }: PublicVerifierPortalProps) {
         </p>
       </div>
 
-      {/* Search Input Bar */}
-      <div className='bg-white dark:bg-neutral-900 p-3 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-md flex items-center gap-2'>
-        <Search className='size-5 text-neutral-400 ml-2' />
-        <input
-          type='text'
-          value={verifyInput}
-          onChange={(e) => setVerifyInput(e.target.value)}
-          placeholder='Enter 12-digit APAAR ID (e.g. 9420-1845-6712)'
-          className='w-full px-2 py-2 text-sm bg-transparent focus:outline-none font-mono text-neutral-900 dark:text-white'
-        />
-        <button
-          onClick={handleVerify}
-          className='bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-xs font-semibold transition shrink-0 cursor-pointer shadow-sm'
-        >
-          Verify Record
-        </button>
-      </div>
+      {/* 1. Verifier Search Input Bar Component */}
+      <VerifierSearchBox
+        value={verifyInput}
+        onChange={setVerifyInput}
+        onVerify={handleVerify}
+      />
 
-      {/* Verification Result Card */}
+      {/* 2. Verification Result Card Component */}
       {verifySearched && <VerificationResultCard record={verifiedRecord} />}
     </div>
   );

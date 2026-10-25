@@ -13,12 +13,12 @@ import {
   XCircle,
   Download,
   LogOut,
-  RefreshCw,
   SlidersHorizontal,
   Sparkles,
   School,
   IdCard,
 } from 'lucide-react';
+import { IngestionPanel } from '@/features/upload';
 
 export type UserRole = 'institution' | 'aicte-admin' | 'verifier' | 'student';
 
@@ -141,10 +141,6 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
   });
   const [addError, setAddError] = useState('');
 
-  // Bulk Upload state
-  const [isUploading, setIsUploading] = useState(false);
-  const [uploadSuccess, setUploadSuccess] = useState(false);
-
   // Filter students
   const filteredStudents = students.filter((s) => {
     const matchesSearch =
@@ -203,15 +199,6 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
     setIsAddModalOpen(false);
     setNewStudent({ apaarId: '', name: '', course: 'Computer Science & Engineering', category: 'Regular' });
     setAddError('');
-  };
-
-  const handleSimulateBulkUpload = () => {
-    setIsUploading(true);
-    setTimeout(() => {
-      setIsUploading(false);
-      setUploadSuccess(true);
-      setTimeout(() => setUploadSuccess(false), 4000);
-    }, 1500);
   };
 
   return (
@@ -357,7 +344,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                   className='bg-blue-600/80 hover:bg-blue-600 border border-blue-400/30 text-white px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2 cursor-pointer'
                 >
                   <Upload className='size-4' />
-                  Bulk Upload (CSV)
+                  Upload Enrolments
                 </button>
               </div>
             </div>
@@ -436,7 +423,7 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
                     : 'border-transparent text-neutral-500 hover:text-neutral-800'
                 }`}
               >
-                Bulk Upload & Verification Engine
+                Data Upload (CSV / Excel / Form)
               </button>
             </div>
 
@@ -599,62 +586,8 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
               </div>
             )}
 
-            {/* Tab Content: Bulk Upload */}
-            {activeTab === 'upload' && (
-              <div className='bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 p-8 shadow-xs text-center'>
-                <div className='max-w-lg mx-auto space-y-4'>
-                  <div className='size-14 mx-auto rounded-full bg-blue-50 dark:bg-blue-950/40 text-blue-600 flex items-center justify-center border border-blue-200 dark:border-blue-800'>
-                    <Upload className='size-6' />
-                  </div>
-                  <h3 className='text-lg font-bold'>Upload Student Enrolment Sheet</h3>
-                  <p className='text-xs text-neutral-500 leading-relaxed'>
-                    Submit student admission data in AICTE standard CSV/Excel format. The platform automatically verifies 12-digit APAAR IDs, validates approved intake limits, and checks for cross-institution duplicate admissions.
-                  </p>
-
-                  <div className='border-2 border-dashed border-neutral-300 dark:border-neutral-700 rounded-2xl p-6 hover:border-blue-500 transition cursor-pointer'>
-                    <p className='text-xs text-neutral-600 dark:text-neutral-300 font-medium'>
-                      Drag and drop your <span className='font-bold text-blue-600'>.CSV or .XLSX</span> file here
-                    </p>
-                    <p className='text-[11px] text-neutral-400 mt-1'>Maximum file size 25MB • Up to 5,000 records per batch</p>
-                  </div>
-
-                  <div className='flex items-center justify-center gap-3 pt-2'>
-                    <button
-                      onClick={handleSimulateBulkUpload}
-                      disabled={isUploading}
-                      className='bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-xs font-semibold transition flex items-center gap-2 shadow-sm cursor-pointer disabled:opacity-50'
-                    >
-                      {isUploading ? (
-                        <>
-                          <RefreshCw className='size-4 animate-spin' />
-                          Validating APAAR Checksums...
-                        </>
-                      ) : (
-                        <>
-                          <FileCheck className='size-4' />
-                          Run Automated Validation
-                        </>
-                      )}
-                    </button>
-                    <button
-                      type='button'
-                      onClick={() => alert('Downloaded sample AICTE APAAR template (.csv)')}
-                      className='border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 px-4 py-2.5 rounded-xl text-xs font-medium transition flex items-center gap-1.5 cursor-pointer'
-                    >
-                      <Download className='size-3.5' />
-                      Sample Template
-                    </button>
-                  </div>
-
-                  {uploadSuccess && (
-                    <div className='p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 rounded-xl text-xs flex items-center justify-center gap-2 animate-fade-in'>
-                      <CheckCircle2 className='size-4' />
-                      240 Student Records Validated & Synced with AICTE Central Database!
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
+            {/* Tab Content: Data Ingestion (CSV / Excel / Form) */}
+            {activeTab === 'upload' && <IngestionPanel />}
           </div>
         )}
 

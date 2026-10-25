@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --background: hsl(0, 0%, 100%);
@@ -35,16 +37,16 @@
 
 @keyframes ripple {
   0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(0.9); }
+  50% { transform: translate(-50%, -50%) scale(0.92); }
 }
 
 @keyframes orbit {
-  0% { transform: rotate(0deg) translateY(calc(var(--radius) * 1px)) rotate(0deg); }
-  100% { transform: rotate(360deg) translateY(calc(var(--radius) * 1px)) rotate(-360deg); }
+  0% { transform: translate(-50%, -50%) rotate(0deg) translateY(calc(var(--radius) * 1px)) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) translateY(calc(var(--radius) * 1px)) rotate(-360deg); }
 }
 
 .animate-ripple {
-  animation: ripple 2s ease calc(var(--i, 0) * 0.2s) infinite;
+  animation: ripple 3s ease-in-out calc(var(--i, 0) * 0.2s) infinite;
 }
 
 .animate-orbit {

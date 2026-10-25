@@ -345,18 +345,43 @@ The scope predicate is the same everywhere: `s_all OR institution = s_institutio
 
 ### A. Zone data flow
 
-&#91;embedded content: zone data flow · 5 stages, master as reference\]
+```mermaid
+flowchart LR
+U["Upload<br/>CSV, Excel, ERP API"] --> S["staging<br/>raw rows, anomalies, PII purge"]
+M["master<br/>institutions, programs, intake caps"] -. validates .-> S
+M -. validates .-> C
+S --> C["core<br/>students, enrolments, national lock"]
+C --> T["trust<br/>credentials, consents, audit chain"]
+C --> A["analytics<br/>matviews, function reads"]
+T --> A
+```
 
 Uploads land in staging, core promotes only verified rows, trust certifies them, and analytics summarises. Master is consulted at every validation step.
 
 ### B. Connection and permission path
 
-&#91;embedded content: connection and permission path · 4 hops, 1 blocked route\]
+```mermaid
+flowchart LR
+  U["Users<br/>Supabase Auth login"] --> B["Node.js backend<br/>service_role, sets actor per transaction"]
+  B --> F["SQL functions<br/>promote_batch, verify_credential, analytics.get_*"]
+  F --> D[("Tables and views<br/>guard triggers, RLS on, audit chain")]
+  X["anon and authenticated<br/>no table grants"] -. blocked .-x D
+```
 
 Users never touch the database directly. The backend, as service\_role, calls functions that enforce scope, and anon and authenticated stay blocked at the table level.
 
 ### C. Main foreign-key relationships
 
-&#91;embedded content: main foreign keys · 8 tables, arrows point to the referenced table\]
+```mermaid
+erDiagram
+institutions ||--o{ institutional_programs : has
+institutional_programs ||--o{ program_intake_approvals : approved_for
+program_intake_approvals ||--o{ student_enrolments : seats
+students ||--o{ student_enrolments : enrols
+student_enrolments ||--o| active_national_enrolment_locks : locked_by
+student_enrolments ||--o{ academic_credentials : certified_by
+students ||--o{ student_consents : grants
+academic_credentials ||--o{ student_consents : scoped_to
+```
 
 Arrows point to the referenced table. Enrolments, credentials, consents and locks also reference institutions and programs; the full list is in section 9.

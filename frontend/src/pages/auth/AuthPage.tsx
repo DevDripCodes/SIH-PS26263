@@ -1,5 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { login } from '@/api/auth';
+import { apiErrorMessage } from '@/api/client';
 import {
   TechOrbitHero,
   LoginForm,
@@ -19,6 +21,8 @@ export function AuthPage({ onLoginSuccess }: AuthPageProps) {
     email: '',
     password: '',
   });
+  const [loginError, setLoginError] = useState<string | undefined>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -33,8 +37,19 @@ export function AuthPage({ onLoginSuccess }: AuthPageProps) {
 
   const handleLoginSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Login submitted:', formData);
-    onLoginSuccess();
+    if (isSubmitting) return;
+
+    setLoginError(undefined);
+    setIsSubmitting(true);
+    try {
+      await login(formData.email, formData.password);
+      setFormData((previous) => ({ ...previous, password: '' }));
+      onLoginSuccess();
+    } catch (error) {
+      setLoginError(apiErrorMessage(error));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleForgotSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -67,6 +82,8 @@ export function AuthPage({ onLoginSuccess }: AuthPageProps) {
                 onInputChange={handleInputChange}
                 onSubmit={handleLoginSubmit}
                 onSwitchMode={setAuthMode}
+                errorField={loginError}
+                isSubmitting={isSubmitting}
               />
             </motion.div>
           )}

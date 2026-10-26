@@ -261,6 +261,7 @@ type AnimatedFormProps = {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   googleLogin?: string;
   goTo?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isSubmitting?: boolean;
 };
 
 const AnimatedForm = memo(function AnimatedForm({
@@ -273,6 +274,7 @@ const AnimatedForm = memo(function AnimatedForm({
   onSubmit,
   googleLogin,
   goTo,
+  isSubmitting = false,
 }: AnimatedFormProps) {
   const [visible, setVisible] = useState<boolean>(false);
   const [errors, setErrors] = useState<Errors>({});
@@ -375,6 +377,8 @@ const AnimatedForm = memo(function AnimatedForm({
                       : field.type
                   }
                   id={field.label}
+                  name={field.label}
+                  required={field.required}
                   placeholder={field.placeholder}
                   onChange={field.onChange}
                 />
@@ -410,9 +414,10 @@ const AnimatedForm = memo(function AnimatedForm({
         <button
           className='w-full h-11 rounded-xl bg-neutral-900 hover:bg-black dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-semibold text-sm transition shadow-md flex items-center justify-center gap-2 cursor-pointer mt-2'
           type='submit'
+          disabled={isSubmitting}
         >
-          <span>{submitButton}</span>
-          <span>&rarr;</span>
+          <span>{isSubmitting ? 'Signing in...' : submitButton}</span>
+          {!isSubmitting && <span>&rarr;</span>}
         </button>
 
         {textVariantButton && goTo && (
@@ -452,6 +457,8 @@ interface AuthTabsProps {
   goTo: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
   googleLogin?: string;
+  errorField?: string;
+  isSubmitting?: boolean;
 }
 
 const AuthTabs = memo(function AuthTabs({
@@ -459,6 +466,8 @@ const AuthTabs = memo(function AuthTabs({
   goTo,
   handleSubmit,
   googleLogin = 'Login with Google',
+  errorField,
+  isSubmitting,
 }: AuthTabsProps) {
   return (
     <div className='w-full max-w-sm mx-auto'>
@@ -468,6 +477,8 @@ const AuthTabs = memo(function AuthTabs({
         onSubmit={handleSubmit}
         goTo={goTo}
         googleLogin={googleLogin}
+        errorField={errorField}
+        isSubmitting={isSubmitting}
       />
     </div>
   );

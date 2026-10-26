@@ -13,6 +13,8 @@ import {
   type SourceChannel,
 } from "./ingestion.service.js";
 import { ParseError, parseCsv, parseExcel, type ParsedSheet } from "./parsers.js";
+import { requireRoles } from "../auth/auth.middleware.js";
+import type { AuthenticatedUser } from "../auth/auth.types.js";
 
 const MAX_FILE_BYTES = 25 * 1024 * 1024;
 const MAX_FORM_RECORDS = 500;
@@ -66,6 +68,18 @@ function parseOrThrow<T extends z.ZodType>(schema: T, data: unknown): z.infer<T>
 
 export const ingestionRouter = Router();
 
+function actorFor(req: Request): AuthenticatedUser {
+  const actor = req.authenticatedUser;
+  if (!actor) throw new IngestionError("Authentication required.", 401);
+  return actor;
+}
+
+function assertInstitutionAccess(actor: AuthenticatedUser, institutionId: string): void {
+  if (actor.role === "AICTE_SUPER_ADMIN") return;
+  if (actor.role === "INSTITUTION_NODAL_OFFICER" && actor.institutionId === institutionId) return;
+  throw new IngestionError("Authorization request denied.", 403);
+}
+
 ingestionRouter.get("/institutions", async (_req, res) => {
   res.json({ institutions: await listInstitutions() });
 });
@@ -115,14 +129,16 @@ ingestionRouter.get("/template", async (req, res) => {
 });
 
 /** Parse a file and report how its columns map, without writing anything. */
-ingestionRouter.post("/preview", upload.single("file"), async (req, res) => {
+ingestionRouter.post("/preview", requireRoles("AICTE_SUPER_ADMIN", "INSTITUTION_NODAL_OFFICER"), upload.single("file"), async (req, res) => {
   const { kind, sheet } = await readSheet(req.file);
   res.json({ kind, ...previewSheet(sheet) });
 });
 
 /** Stage 1: land every row of a CSV/Excel file in staging and return the new batch (HTTP 202). */
-ingestionRouter.post("/upload", upload.single("file"), async (req, res) => {
+ingestionRouter.post("/upload", requireRoles("AICTE_SUPER_ADMIN", "INSTITUTION_NODAL_OFFICER"), upload.single("file"), async (req, res) => {
   const scope = parseOrThrow(batchScope, req.body);
+  const actor = actorFor(req);
+  assertInstitutionAccess(actor, scope.institutionId);
   const { kind, sheet } = await readSheet(req.file);
 
   const mapping = buildMapping(sheet.headers);
@@ -138,6 +154,7 @@ ingestionRouter.post("/upload", upload.single("file"), async (req, res) => {
   const source: SourceChannel = kind === "csv" ? "CSV_UPLOAD" : "EXCEL_UPLOAD";
   const batch = await ingest({
     ...scope,
+    submittedBy: actor.userId,
     source,
     filename: req.file!.originalname,
     file: req.file!.buffer,
@@ -148,11 +165,14 @@ ingestionRouter.post("/upload", upload.single("file"), async (req, res) => {
 });
 
 /** Stage 1 for students keyed in through the web form. */
-ingestionRouter.post("/form", async (req, res) => {
+ingestionRouter.post("/form", requireRoles("AICTE_SUPER_ADMIN", "INSTITUTION_NODAL_OFFICER"), async (req, res) => {
   const body = parseOrThrow(formBody, req.body);
+  const actor = actorFor(req);
+  assertInstitutionAccess(actor, body.institutionId);
   const batch = await ingest({
     institutionId: body.institutionId,
     academicYear: body.academicYear,
+    submittedBy: actor.userId,
     source: "WEB_FORM",
     filename: null,
     rows: body.records.map((row, i) => ({ row, sourceRowNumber: i + 1 })),
@@ -162,12 +182,20 @@ ingestionRouter.post("/form", async (req, res) => {
 
 ingestionRouter.get("/batches", async (req, res) => {
   const institutionId = parseOrThrow(z.uuid(), req.query.institutionId);
+  assertInstitutionAccess(actorFor(req), institutionId);
   res.json({ batches: await listBatches(institutionId) });
 });
 
 ingestionRouter.get("/batches/:batchId", async (req, res) => {
   const batchId = parseOrThrow(z.uuid(), req.params.batchId);
-  const batch = await getBatch(batchId);
+  const actor = actorFor(req);
+  if (actor.role !== "AICTE_SUPER_ADMIN" && actor.role !== "INSTITUTION_NODAL_OFFICER") {
+    throw new IngestionError("Authorization request denied.", 403);
+  }
+  if (actor.role === "INSTITUTION_NODAL_OFFICER" && !actor.institutionId) {
+    throw new IngestionError("Authorization request denied.", 403);
+  }
+  const batch = await getBatch(batchId, actor.role === "AICTE_SUPER_ADMIN" ? undefined : actor.institutionId ?? undefined);
   if (!batch) throw new IngestionError("Batch not found.", 404);
   res.json({ batch });
 });

@@ -6,7 +6,7 @@ Architecture: [docs/APAAR_Platform_Architecture.drawio](docs/APAAR_Platform_Arch
 |---|---|
 | Frontend | React, TypeScript, Vite, Tailwind |
 | Backend | Node.js (LTS), Express, TypeScript, REST |
-| Auth | Keycloak (OIDC/MFA), OAuth2, RBAC |
+| Auth | Supabase Auth (email/password), API-managed roles and scopes |
 | Database | PostgreSQL (Prisma) |
 | Background jobs | BullMQ, Redis |
 | Integrations | REST adapters |
@@ -26,7 +26,19 @@ backend/
 frontend/
   src/pages/          institution, approver, aicte-admin, regional, verifier, student, public
   src/features/       upload, validation, approvals, dashboards, consent, verification, reports
+  src/api/            shared API client and authentication/session handling
 ```
+
+## Authentication
+
+The frontend uses the backend's Supabase email/password authentication endpoints. Configure `VITE_API_BASE_URL` in `frontend/.env.local`; it defaults to `http://localhost:4000/api/v1`.
+
+- Sign-in calls `POST /auth/login`. The dashboard opens only after the API authenticates the user and returns an active profile.
+- The frontend keeps the access and refresh tokens in tab-scoped `sessionStorage`, attaches the access token to API requests, and calls `GET /auth/me` to restore a session after reload.
+- When a protected request returns `401`, the frontend calls `POST /auth/refresh` and retries the request once. Sign-out calls `POST /auth/logout` and clears the local session.
+- The role management endpoints are backend-only; the frontend does not connect to `/roles` yet. Password recovery is also unavailable until a backend endpoint is added.
+
+See [backend/AUTH_API_GUIDE.md](backend/AUTH_API_GUIDE.md) for Supabase setup, first-admin bootstrapping, request examples, and the complete auth API reference.
 
 ## Data ingestion (Stage 1)
 
@@ -39,7 +51,7 @@ Institutions submit enrolments three ways from the dashboard's **Data Upload** t
 | `POST /form` | JSON `{ institutionId, academicYear, records: [...] }`, up to 500 students. |
 | `GET /batches?institutionId=` · `GET /batches/:id` | Batch status and row counters. |
 | `GET /template?format=csv\|xlsx` | Blank template with the standard column headers. |
-| `GET /institutions` | Institution picker (until Keycloak auth provides the institution). |
+| `GET /institutions` | List institutions for the upload picker. |
 
 Column headers are matched loosely (`APAAR ID`, `apaar_no`, `Student Name`, `DOB`, …). See `backend/src/modules/ingestion/columns.ts`. Unknown columns are kept in `raw_payload`. Form entry needs `database/db_scripts/ingestion_patch.sql` applied (adds the `WEB_FORM` source channel).
 
@@ -48,6 +60,8 @@ Column headers are matched loosely (`APAAR ID`, `apaar_no`, `Student Name`, `DOB
 The database is hosted on Supabase; put its pooler connection string in `backend/.env` as `DATABASE_URL`.
 
 ```bash
-cd backend  && cp .env.example .env && npm install
-cd frontend && cp .env.example .env.local && npm install
+cd backend && cp .env.example .env && npm install
+cd ../frontend && cp .env.example .env.local && npm install
 ```
+
+Run the backend and frontend in separate terminals with `npm run dev` from their respective directories. Configure the backend variables in `backend/.env` and `VITE_API_BASE_URL` in `frontend/.env.local` before signing in.

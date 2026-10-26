@@ -2,11 +2,18 @@ import type { FormEvent } from 'react';
 import { AuthTabs } from '@/components/ui/modern-animated-sign-in';
 import type { AuthPageProps } from './types';
 
+interface LoginFormProps extends AuthPageProps {
+  errorField?: string;
+  isSubmitting?: boolean;
+}
+
 export function LoginForm({
   onInputChange,
   onSubmit,
   onSwitchMode,
-}: AuthPageProps) {
+  errorField,
+  isSubmitting,
+}: LoginFormProps) {
   const loginFormFields = {
     header: 'Welcome back',
     subHeader: 'Sign in to access AICTE APAAR Platform',
@@ -41,6 +48,8 @@ export function LoginForm({
           onSwitchMode('forgot-password');
         }}
         handleSubmit={onSubmit}
+        errorField={errorField}
+        isSubmitting={isSubmitting}
         googleLogin='Login with Google'
       />
     </div>

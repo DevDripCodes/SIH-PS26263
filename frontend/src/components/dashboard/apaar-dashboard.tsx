@@ -16,11 +16,7 @@ interface ApaarDashboardProps {
 
 export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
   const [activeRole, setActiveRole] = useState<UserRole>('institution');
-  const [students, setStudents] = useState<StudentRecord[]>(mockStudents);
-
-  const handleAddStudent = (newRecord: StudentRecord) => {
-    setStudents((prev) => [newRecord, ...prev]);
-  };
+  const [students] = useState<StudentRecord[]>(mockStudents);
 
   return (
     <div className='min-h-screen bg-neutral-50 dark:bg-[#030712] text-neutral-900 dark:text-neutral-100 font-sans transition-colors'>
@@ -37,7 +33,6 @@ export function ApaarDashboard({ onSignOut }: ApaarDashboardProps) {
           <InstitutionPortal
             intakeData={mockIntakeData}
             students={students}
-            onAddStudent={handleAddStudent}
           />
         )}
 

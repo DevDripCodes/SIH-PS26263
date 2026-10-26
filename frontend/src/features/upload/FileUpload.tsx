@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { apiErrorMessage } from '@/api/client';
 import { cn } from '@/lib/utils';
-import { previewFile, templateUrl, uploadFile } from './api';
+import { downloadTemplate, previewFile, uploadFile } from './api';
 import { FIELD_LABELS, FIELDS, type Batch, type BatchScope, type FilePreview } from './types';
 
 const MAX_FILE_BYTES = 25 * 1024 * 1024;
@@ -235,13 +235,14 @@ export function FileUpload({ kind, scope, onUploaded }: FileUploadProps) {
             </>
           )}
         </button>
-        <a
-          href={templateUrl(config.template)}
-          className='border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 px-4 py-2.5 rounded-xl text-xs font-medium transition flex items-center gap-1.5'
+        <button
+          type='button'
+          onClick={() => downloadTemplate(config.template).catch((err) => setError(apiErrorMessage(err)))}
+          className='border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 px-4 py-2.5 rounded-xl text-xs font-medium transition flex items-center gap-1.5 cursor-pointer'
         >
           <Download className='size-3.5' />
           {config.label} template
-        </a>
+        </button>
         {!scope && <span className='text-[11px] text-neutral-500'>Choose an institution and academic year first.</span>}
       </div>
     </div>

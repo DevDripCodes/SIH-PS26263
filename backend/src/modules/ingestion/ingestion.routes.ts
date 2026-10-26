@@ -14,7 +14,8 @@ import {
 } from "./ingestion.service.js";
 import { ParseError, parseCsv, parseExcel, type ParsedSheet } from "./parsers.js";
 import { requireRoles } from "../auth/auth.middleware.js";
-import type { AuthenticatedUser } from "../auth/auth.types.js";
+import { actorFor, assertInstitutionAccess } from "../auth/institution-access.js";
+import { HttpError } from "../../utils/http-error.js";
 
 const MAX_FILE_BYTES = 25 * 1024 * 1024;
 const MAX_FORM_RECORDS = 500;
@@ -25,7 +26,6 @@ const upload = multer({
 });
 
 const batchScope = z.object({
-  // TODO(auth): take institutionId from the nodal officer's Keycloak token instead of the request.
   institutionId: z.uuid({ error: "Select an institution." }),
   academicYear: z.string().regex(/^\d{4}-\d{2}$/, { error: "Academic year must look like 2026-27." }),
 });
@@ -68,20 +68,13 @@ function parseOrThrow<T extends z.ZodType>(schema: T, data: unknown): z.infer<T>
 
 export const ingestionRouter = Router();
 
-function actorFor(req: Request): AuthenticatedUser {
-  const actor = req.authenticatedUser;
-  if (!actor) throw new IngestionError("Authentication required.", 401);
-  return actor;
-}
-
-function assertInstitutionAccess(actor: AuthenticatedUser, institutionId: string): void {
-  if (actor.role === "AICTE_SUPER_ADMIN") return;
-  if (actor.role === "INSTITUTION_NODAL_OFFICER" && actor.institutionId === institutionId) return;
-  throw new IngestionError("Authorization request denied.", 403);
-}
-
-ingestionRouter.get("/institutions", async (_req, res) => {
-  res.json({ institutions: await listInstitutions() });
+ingestionRouter.get("/institutions", async (req, res) => {
+  const actor = actorFor(req);
+  const institutions = await listInstitutions();
+  res.json({
+    institutions:
+      actor.role === "AICTE_SUPER_ADMIN" ? institutions : institutions.filter((i) => i.institutionId === actor.institutionId),
+  });
 });
 
 ingestionRouter.get("/fields", (_req, res) => {
@@ -201,7 +194,7 @@ ingestionRouter.get("/batches/:batchId", async (req, res) => {
 });
 
 export function ingestionErrorHandler(err: unknown, _req: Request, res: Response, next: NextFunction) {
-  if (err instanceof IngestionError) {
+  if (err instanceof HttpError) {
     res.status(err.status).json({ error: err.message, details: err.details });
   } else if (err instanceof ParseError) {
     res.status(422).json({ error: err.message });

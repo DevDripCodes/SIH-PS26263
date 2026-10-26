@@ -55,6 +55,21 @@ Institutions submit enrolments three ways from the dashboard's **Data Upload** t
 
 Column headers are matched loosely (`APAAR ID`, `apaar_no`, `Student Name`, `DOB`, …). See `backend/src/modules/ingestion/columns.ts`. Unknown columns are kept in `raw_payload`. Form entry needs `database/db_scripts/ingestion_patch.sql` applied (adds the `WEB_FORM` source channel).
 
+## Validation pipeline
+
+Full guide (setup, checks, statuses, API, frontend, limitations, troubleshooting): [docs/ingestion-and-validation.md](docs/ingestion-and-validation.md).
+
+Uploads are validated by a BullMQ job (`backend/src/jobs`, logic in `backend/src/modules/validation`):
+
+| Stage | Where | Checks |
+|---|---|---|
+| L1 | app (`l1-rules.ts`) | required fields, APAAR format, dates, age vs program level, residency/FN/OCI flags, passport/OCI/visa/sponsorship documents, EWS seat vs category, unknown program, duplicate student / roll no. within the upload |
+| L2 | app (`stages/l2.stage.ts`) | resolves each row to `core.students`: name/DOB must match an existing APAAR; new students are created (non-residents with an AES-256-GCM encrypted profile). DigiLocker/ABC lookup plugs into `integrations/apaar-registry` and is not connected yet |
+| Approval | institution | nodal officer reviews the report, can run a dry-run pre-check, then approves (logged to the audit chain) |
+| L3 | database (`core.promote_batch`) | intake approval / AICTE lock, seat caps per quota, quota vs residency, cut-off date, roll numbers, cross-institution national lock, then promotion |
+
+API: `/api/v1/validation/batches/:id` (report), `/anomalies`, `/corrections.csv`, `POST /precheck`, `/approve`, `/cancel`, `/retry`. Without `REDIS_URL` jobs run inline in the API process.
+
 ## Getting started
 
 The database is hosted on Supabase; put its pooler connection string in `backend/.env` as `DATABASE_URL`.

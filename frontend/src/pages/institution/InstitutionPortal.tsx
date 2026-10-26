@@ -6,39 +6,33 @@ import {
   IntakeMetricsGrid,
   IntakeSummaryTable,
   StudentDirectoryTable,
-  AddStudentModal,
-  BulkUploadModal,
 } from './components';
 
 interface InstitutionPortalProps {
   intakeData: IntakeData[];
   students: StudentRecord[];
-  onAddStudent?: (student: StudentRecord) => void;
 }
 
 export function InstitutionPortal({
   intakeData,
   students,
-  onAddStudent,
 }: InstitutionPortalProps) {
   const [activeTab, setActiveTab] = useState<'overview' | 'students' | 'upload'>('overview');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
-
-  const handleAddNewStudent = (newRecord: StudentRecord) => {
-    if (onAddStudent) {
-      onAddStudent(newRecord);
-    }
+  // Both header actions open the real ingestion tab: bulk upload, or the single-student form.
+  const [ingestionMethod, setIngestionMethod] = useState<'csv' | 'form'>('csv');
+  const openIngestion = (method: 'csv' | 'form') => {
+    setIngestionMethod(method);
+    setActiveTab('upload');
   };
 
   return (
     <div className='space-y-6'>
       {/* 1. Institution Header Banner */}
       <InstitutionHeader
-        onOpenAddModal={() => setIsAddModalOpen(true)}
-        onOpenUploadModal={() => setIsUploadModalOpen(true)}
+        onOpenAddModal={() => openIngestion('form')}
+        onOpenUploadModal={() => openIngestion('csv')}
       />
 
       {/* 2. 4 Metric Stats Cards */}
@@ -96,20 +90,8 @@ export function InstitutionPortal({
       )}
 
       {activeTab === 'upload' && (
-        <IngestionPanel />
+        <IngestionPanel key={ingestionMethod} initialMethod={ingestionMethod} />
       )}
-
-      {/* 5. Modals isolated to Institution page */}
-      <AddStudentModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onAddStudent={handleAddNewStudent}
-      />
-
-      <BulkUploadModal
-        isOpen={isUploadModalOpen}
-        onClose={() => setIsUploadModalOpen(false)}
-      />
     </div>
   );
 }

@@ -1,4 +1,5 @@
-import { api, API_BASE_URL } from '@/api/client';
+import { api } from '@/api/client';
+import { downloadFile } from '@/api/download';
 import type { Batch, BatchScope, ColumnMapping, FilePreview, Institution, StudentRow } from './types';
 
 export async function listInstitutions(): Promise<Institution[]> {
@@ -41,6 +42,6 @@ export async function listBatches(institutionId: string): Promise<Batch[]> {
   return data.batches;
 }
 
-export function templateUrl(format: 'csv' | 'xlsx'): string {
-  return `${API_BASE_URL}/ingestion/template?format=${format}`;
+export function downloadTemplate(format: 'csv' | 'xlsx'): Promise<void> {
+  return downloadFile('/ingestion/template', `apaar_enrolment_template.${format}`, { format });
 }

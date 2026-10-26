@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
-import { CheckCircle2, ClipboardList, FileSpreadsheet, FileText, RefreshCw } from 'lucide-react';
+import { CheckCircle2, ChevronRight, ClipboardList, FileSpreadsheet, FileText, RefreshCw } from 'lucide-react';
+import { getAuthSession } from '@/api/auth-session';
 import { apiErrorMessage } from '@/api/client';
+import { BatchValidationReport } from '@/features/validation';
 import { cn } from '@/lib/utils';
 import { listBatches, listInstitutions } from './api';
 import { CsvUpload, ExcelUpload } from './FileUpload';
@@ -27,12 +29,22 @@ const STATUS_STYLE: Record<BatchStatus, string> = {
   L1_PROCESSING: 'text-indigo-700 bg-indigo-50 dark:text-indigo-300 dark:bg-indigo-950/40',
   L1_COMPLETED: 'text-indigo-700 bg-indigo-50 dark:text-indigo-300 dark:bg-indigo-950/40',
   L2_PROCESSING: 'text-indigo-700 bg-indigo-50 dark:text-indigo-300 dark:bg-indigo-950/40',
-  L2_COMPLETED: 'text-indigo-700 bg-indigo-50 dark:text-indigo-300 dark:bg-indigo-950/40',
+  L2_COMPLETED: 'text-blue-700 bg-blue-100 dark:text-blue-200 dark:bg-blue-900/50',
   L3_PROCESSING: 'text-indigo-700 bg-indigo-50 dark:text-indigo-300 dark:bg-indigo-950/40',
   COMPLETED: 'text-emerald-700 bg-emerald-50 dark:text-emerald-300 dark:bg-emerald-950/40',
   COMPLETED_WITH_ANOMALIES: 'text-amber-700 bg-amber-50 dark:text-amber-300 dark:bg-amber-950/40',
   FAILED: 'text-red-700 bg-red-50 dark:text-red-300 dark:bg-red-950/40',
   CANCELLED: 'text-neutral-600 bg-neutral-100 dark:text-neutral-400 dark:bg-neutral-800',
+};
+
+const STATUS_LABEL: Partial<Record<BatchStatus, string>> = {
+  UPLOADED: 'queued',
+  L1_PROCESSING: 'checking format',
+  L1_COMPLETED: 'checking identity',
+  L2_PROCESSING: 'checking identity',
+  L2_COMPLETED: 'awaiting approval',
+  L3_PROCESSING: 'committing',
+  COMPLETED_WITH_ANOMALIES: 'completed with issues',
 };
 
 const SOURCE_LABEL: Record<Batch['sourceChannel'], string> = {
@@ -45,25 +57,31 @@ const SOURCE_LABEL: Record<Batch['sourceChannel'], string> = {
 interface IngestionPanelProps {
   /** Pre-select (and lock) the institution, e.g. from the signed-in nodal officer's profile. */
   institutionId?: string;
+  initialMethod?: Method;
 }
 
-export function IngestionPanel({ institutionId: fixedInstitutionId }: IngestionPanelProps) {
+export function IngestionPanel({ institutionId: institutionIdProp, initialMethod = 'csv' }: IngestionPanelProps) {
+  const sessionUser = getAuthSession()?.user;
+  // Nodal officers can only submit for their own institution.
+  const fixedInstitutionId =
+    institutionIdProp ??
+    (sessionUser?.role === 'INSTITUTION_NODAL_OFFICER' ? (sessionUser.institutionId ?? undefined) : undefined);
   const years = academicYears();
   const [institutions, setInstitutions] = useState<Institution[]>([]);
   const [institutionId, setInstitutionId] = useState(fixedInstitutionId ?? '');
   const [academicYear, setAcademicYear] = useState(years[1]!);
-  const [method, setMethod] = useState<Method>('csv');
+  const [method, setMethod] = useState<Method>(initialMethod);
   const [batches, setBatches] = useState<Batch[]>([]);
   const [lastBatch, setLastBatch] = useState<Batch | null>(null);
   const [loadError, setLoadError] = useState('');
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [openBatchId, setOpenBatchId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (fixedInstitutionId) return;
     listInstitutions()
       .then((list) => {
         setInstitutions(list);
-        if (list.length === 1) setInstitutionId(list[0]!.institutionId);
+        if (list.length === 1 && !fixedInstitutionId) setInstitutionId(list[0]!.institutionId);
       })
       .catch((err) => setLoadError(apiErrorMessage(err)));
   }, [fixedInstitutionId]);
@@ -89,7 +107,15 @@ export function IngestionPanel({ institutionId: fixedInstitutionId }: IngestionP
   const handleIngested = (batch: Batch) => {
     setLastBatch(batch);
     setBatches((prev) => [batch, ...prev.filter((b) => b.batchId !== batch.batchId)]);
+    setOpenBatchId(batch.batchId);
   };
+
+  // Stable so the report's polling effect does not restart on every render.
+  const handleBatchChange = useCallback((batch: Batch) => {
+    setBatches((prev) => prev.map((b) => (b.batchId === batch.batchId ? batch : b)));
+  }, []);
+
+  const fixedInstitution = institutions.find((i) => i.institutionId === fixedInstitutionId);
 
   return (
     <div className='space-y-6'>
@@ -97,8 +123,9 @@ export function IngestionPanel({ institutionId: fixedInstitutionId }: IngestionP
         <div>
           <h3 className='text-base font-bold'>Submit Student Enrolment Data</h3>
           <p className='text-xs text-neutral-500 mt-1 leading-relaxed'>
-            Every row is saved to the staging area first, then checked for APAAR ID format, duplicates, approved
-            intake limits and cross-institution enrolments. Rows that fail come back as anomalies to fix.
+            Every row is saved to the staging area first and checked for format, consistency, duplicates and student
+            identity. You then review and approve the batch, and the repository checks approved intake, seat quotas and
+            enrolments at other institutions before committing. Rows that fail come back with reasons to fix.
           </p>
         </div>
 
@@ -112,7 +139,9 @@ export function IngestionPanel({ institutionId: fixedInstitutionId }: IngestionP
               className='w-full px-3 py-2 text-xs rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500 disabled:opacity-70'
             >
               {fixedInstitutionId ? (
-                <option value={fixedInstitutionId}>Your institution</option>
+                <option value={fixedInstitutionId}>
+                  {fixedInstitution ? `${fixedInstitution.name} (${fixedInstitution.aictePermanentId})` : 'Your institution'}
+                </option>
               ) : (
                 <>
                   <option value=''>{institutions.length ? 'Select institution' : 'No institutions found'}</option>
@@ -171,7 +200,7 @@ export function IngestionPanel({ institutionId: fixedInstitutionId }: IngestionP
             <span>
               {lastBatch.totalRows.toLocaleString('en-IN')} {lastBatch.totalRows === 1 ? 'record' : 'records'} received
               for {lastBatch.academicYear}. Batch <span className='font-mono'>{lastBatch.batchId.slice(0, 8)}</span> is
-              queued for validation.
+              being validated; follow its progress in the report below.
             </span>
           </div>
         )}
@@ -181,12 +210,21 @@ export function IngestionPanel({ institutionId: fixedInstitutionId }: IngestionP
         {method === 'form' && <ManualEntryForm scope={scope} onSubmitted={handleIngested} />}
       </div>
 
+      {openBatchId && (
+        <BatchValidationReport
+          key={openBatchId}
+          batchId={openBatchId}
+          onClose={() => setOpenBatchId(null)}
+          onBatchChange={handleBatchChange}
+        />
+      )}
+
       {institutionId && (
         <div className='bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 p-6 shadow-xs'>
           <div className='flex items-center justify-between mb-4'>
             <div>
               <h3 className='text-base font-bold'>Recent Submissions</h3>
-              <p className='text-xs text-neutral-500'>Validation progress for each batch</p>
+              <p className='text-xs text-neutral-500'>Select a batch to see its validation report</p>
             </div>
             <button
               type='button'
@@ -213,11 +251,19 @@ export function IngestionPanel({ institutionId: fixedInstitutionId }: IngestionP
                     <th className='py-2.5 font-semibold text-right'>Quarantined</th>
                     <th className='py-2.5 font-semibold text-right'>Promoted</th>
                     <th className='py-2.5 font-semibold pl-4'>Status</th>
+                    <th className='py-2.5' />
                   </tr>
                 </thead>
                 <tbody className='divide-y divide-neutral-100 dark:divide-neutral-800/60'>
                   {batches.map((b) => (
-                    <tr key={b.batchId}>
+                    <tr
+                      key={b.batchId}
+                      onClick={() => setOpenBatchId(b.batchId)}
+                      className={cn(
+                        'cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-800/40',
+                        openBatchId === b.batchId && 'bg-blue-50/60 dark:bg-blue-950/20',
+                      )}
+                    >
                       <td className='py-2.5'>
                         <div className='font-medium'>
                           {new Date(b.uploadedAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}
@@ -237,8 +283,11 @@ export function IngestionPanel({ institutionId: fixedInstitutionId }: IngestionP
                           className={cn('px-2 py-0.5 rounded-full font-medium whitespace-nowrap', STATUS_STYLE[b.status])}
                           title={b.failureReason ?? undefined}
                         >
-                          {b.status.replace(/_/g, ' ').toLowerCase()}
+                          {STATUS_LABEL[b.status] ?? b.status.replace(/_/g, ' ').toLowerCase()}
                         </span>
+                      </td>
+                      <td className='py-2.5 text-right'>
+                        <ChevronRight className='size-4 text-neutral-400 inline' />
                       </td>
                     </tr>
                   ))}

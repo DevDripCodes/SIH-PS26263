@@ -1,6 +1,9 @@
 import { createHash } from "node:crypto";
 import type { PoolClient } from "pg";
 import { pool } from "../../db/pool.js";
+import { enqueueValidationJob } from "../../jobs/queues/validation.queue.js";
+import { markBatchFailed } from "../validation/pipeline.js";
+import { HttpError } from "../../utils/http-error.js";
 import { FIELDS, applyMapping, buildMapping, type CanonicalRow, type ColumnMapping } from "./columns.js";
 import type { ParsedSheet } from "./parsers.js";
 
@@ -10,15 +13,7 @@ export const MAX_ROWS_PER_BATCH = 50_000;
 // 26 bind params per row -> stays well under Postgres' 65,535 parameter limit
 const INSERT_CHUNK = 1_000;
 
-export class IngestionError extends Error {
-  constructor(
-    message: string,
-    readonly status: number,
-    readonly details?: unknown,
-  ) {
-    super(message);
-  }
-}
+export class IngestionError extends HttpError {}
 
 export interface SheetPreview {
   totalRows: number;
@@ -77,6 +72,7 @@ export async function ingest(input: IngestInput): Promise<BatchSummary> {
 
   const sha256 = input.file ? createHash("sha256").update(input.file).digest("hex") : null;
   const client = await pool.connect();
+  let batchId: string;
   try {
     await client.query("BEGIN");
 
@@ -115,21 +111,30 @@ export async function ingest(input: IngestInput): Promise<BatchSummary> {
         rows.length,
       ],
     );
-    const batchId = batch.rows[0]!.batch_id;
+    batchId = batch.rows[0]!.batch_id;
 
     for (let i = 0; i < rows.length; i += INSERT_CHUNK) {
       await insertRecords(client, batchId, input, rows.slice(i, i + INSERT_CHUNK));
     }
 
     await client.query("COMMIT");
-    // TODO(validation): enqueue the L1 BullMQ job here and store bullmq_job_id once the worker exists.
-    return (await getBatch(batchId, input.institutionId))!;
   } catch (err) {
     await client.query("ROLLBACK");
     throw translatePgError(err);
   } finally {
     client.release();
   }
+
+  // Rows are committed; hand the batch to the L1/L2 validation pipeline. If the queue is down the
+  // upload is kept and marked FAILED, so it can be retried from the dashboard without re-uploading.
+  try {
+    const jobId = await enqueueValidationJob({ kind: "validate", batchId });
+    await pool.query("UPDATE staging.submission_batches SET bullmq_job_id = $2 WHERE batch_id = $1", [batchId, jobId]);
+  } catch (err) {
+    console.error(`[ingestion] could not queue batch ${batchId} for validation`, err);
+    await markBatchFailed(batchId, "Could not queue the batch for validation. Use Retry to try again.");
+  }
+  return (await getBatch(batchId, input.institutionId))!;
 }
 
 const RECORD_COLUMNS = [

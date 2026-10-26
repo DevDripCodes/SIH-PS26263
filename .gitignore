@@ -17,3 +17,7 @@ backend/generated/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Track the built database SDK package output.
+!database/db_connect/dist/
+!database/db_connect/dist/**

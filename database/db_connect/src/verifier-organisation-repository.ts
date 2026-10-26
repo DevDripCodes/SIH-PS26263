@@ -83,6 +83,7 @@ export async function setVerifierMembershipActive(input: VerifierActor & { userI
     const self = targetUserId === actor.userId.toLowerCase();
     if (!self && actor.role !== "AICTE_SUPER_ADMIN") throw new AuthorizationError("FORBIDDEN");
     if (self && actor.role !== "EMPLOYER_VERIFIER") throw new AuthorizationError("FORBIDDEN");
+    if (self && input.active) throw new AuthorizationError("FORBIDDEN");
     if (input.active) {
       const target = await tx.query<{ role: string; isActive: boolean }>("SELECT role::text AS role, is_active AS \"isActive\" FROM master.user_profiles WHERE user_id = $1::uuid FOR SHARE", [targetUserId]);
       if (target.rows[0]?.role !== "EMPLOYER_VERIFIER" || target.rows[0].isActive !== true) throw new AuthorizationError("FORBIDDEN");

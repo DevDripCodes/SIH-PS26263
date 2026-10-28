@@ -18,10 +18,10 @@ export function InstitutionHeader({
           Academic Year 2026-2027 • Approved Intake Verification
         </span>
         <h2 className='text-2xl font-bold tracking-tight text-neutral-950 dark:text-white'>
-          Delhi Technological University (DTU)
+          Maharaja Agrasen Institute of Technology (MAIT)
         </h2>
         <p className='text-xs text-neutral-500 dark:text-neutral-400 mt-1'>
-          Permanent AICTE Institute ID: 1-9321482 • State Public University • New Delhi
+          Institution Portal • New Delhi
         </p>
       </div>
 

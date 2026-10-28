@@ -32,7 +32,7 @@ export function AddStudentModal({
       id: String(Date.now()),
       name: formData.name,
       apaarId: formData.apaarId,
-      institution: 'Delhi Technological University',
+      institution: 'Maharaja Agrasen Institute of Technology',
       course: formData.program,
       program: formData.program,
       category: formData.category,

@@ -35,7 +35,7 @@ export function VerificationResultCard({ record, student }: VerificationResultCa
         <div>
           <span className='text-neutral-400 block text-[11px]'>Institution Name</span>
           <span className='font-semibold text-neutral-800 dark:text-neutral-200'>
-            {currentRecord.institution || 'Delhi Technological University'}
+            {currentRecord.institution || 'Maharaja Agrasen Institute of Technology'}
           </span>
         </div>
         <div>

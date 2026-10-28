@@ -95,9 +95,9 @@ export function GlobalNavbar({
           <div className='flex items-center gap-2.5'>
             <div className='hidden sm:block text-right'>
               <p className='text-xs font-semibold text-neutral-900 dark:text-white'>
-                AICTE ID: 1-9321482
+                MAIT
               </p>
-              <p className='text-[10px] text-neutral-500'>DTU, Delhi (Govt)</p>
+              <p className='text-[10px] text-neutral-500'>New Delhi</p>
             </div>
             <button
               onClick={onSignOut}

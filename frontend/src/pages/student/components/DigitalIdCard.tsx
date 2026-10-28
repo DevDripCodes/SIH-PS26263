@@ -42,7 +42,7 @@ export function DigitalIdCard({ student }: DigitalIdCardProps) {
             <p className='text-lg font-bold text-white'>{student.name}</p>
             <p className='text-xs text-slate-300'>{programName}</p>
             <p className='text-[11px] text-slate-400'>
-              {student.institution || 'Delhi Technological University (AICTE ID: 1-9321482)'}
+              {student.institution || 'Maharaja Agrasen Institute of Technology (MAIT)'}
             </p>
           </div>
         </div>

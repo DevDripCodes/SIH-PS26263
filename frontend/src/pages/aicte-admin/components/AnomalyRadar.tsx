@@ -44,7 +44,7 @@ export function AnomalyRadar({ flaggedStudents, students }: AnomalyRadarProps) {
 
           const reasonText =
             a.flagReason ||
-            'Simultaneous active enrollment detected at: DTU (CSE) & GGSIPU (IT). Conflicting admission counseling record.';
+            'Simultaneous active enrollment detected at: MAIT (CSE) & GGSIPU (IT). Conflicting admission counseling record.';
 
           return (
             <div

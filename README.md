@@ -1,6 +1,11 @@
 # APAAR-Based Student Data Management & Verification Platform (SIH PS26263)
 
-Architecture: [docs/APAAR_Platform_Architecture.drawio](docs/APAAR_Platform_Architecture.drawio) · Tech stack: [docs/tech-stack.jpeg](docs/tech-stack.jpeg)
+## 📌 Project Resources
+
+- 🏗️ **System Architecture:** [View Architecture Diagram](docs/APAAR_Platform_Architecture.drawio)
+- 🎨 **Tech Stack:** [View Tech Stack](docs/tech-stack.jpeg)
+- 🎬 **Project Demo — SIH26263:** [![Watch Demo](https://img.youtube.com/vi/k-VIT7I2-FA/maxresdefault.jpg)](https://youtu.be/k-VIT7I2-FA)
+- 🧩 **Figma Jam:** [View Problem Statement Breakdown on FigJam]([YOUR_FIGJAM_LINK](https://www.figma.com/board/VRCbpNegCmIpaR8gO0iv4h/Untitled?node-id=0-1&t=hL0hGpwy0lKrzJiW-1))
 
 | Component | Technologies |
 |---|---|

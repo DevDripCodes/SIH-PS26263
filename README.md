@@ -4,7 +4,7 @@
 
 - 🏗️ **System Architecture:** [View Architecture Diagram](docs/APAAR_Platform_Architecture.drawio)
 - 🎨 **Tech Stack:** [View Tech Stack](docs/tech-stack.jpeg)
-- 🧩 **Figma Jam:** [View Problem Statement Breakdown on FigJam](https://www.figma.com/board/VRCbpNegCmIpaR8g0biv4h/Untitled?node-id=0-1)
+- 🧩 **Figma Jam:** [View Problem Statement Breakdown on FigJam](https://www.figma.com/board/VRCbpNegCmIpaR8gO0iv4h/sih-26263?node-id=0-1&t=P8ZpVpaOPBXTzsXM-0)
 - 🎬 **Project Demo — SIH26263:** [![Watch Demo](https://img.youtube.com/vi/k-VIT7I2-FA/maxresdefault.jpg)](https://youtu.be/k-VIT7I2-FA)
 
 | Component | Technologies |
